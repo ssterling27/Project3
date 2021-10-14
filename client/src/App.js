@@ -17,16 +17,16 @@ function App() {
     <Router>
       <div>
         <Switch>
-          <Route exact path='/'>
+          {/* <Route exact path='/'>
             <Home />
-          </Route>
+          </Route> */}
           <Route path='/signIn'>
             <Login />
           </Route>
           <Route path='/register'>
             <Register />
           </Route>
-          <Route path='/calendar'>
+          {/* <Route path='/calendar'>
             <Calendar />
           </Route>
           <Route path='/addfriend'>
@@ -37,7 +37,7 @@ function App() {
           </Route>
           <Route path='/activites'>
             <Activities />
-          </Route>
+          </Route> */}
         </Switch>
       </div>
     </Router>

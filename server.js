@@ -35,9 +35,19 @@ passport.use(new JwtStrategy({
 
 app.use(require('./routes'))
 
-app.get('*', (req, res) => {
-  res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
-})
+// app.get('/test', (req, res) => {
+//   res.json('string of test')
+// })
+
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
+  })
+}
+
+// app.get('*', (req, res) => {
+//   res.sendFile(join(__dirname, 'client', 'build', 'index.html'))
+// })
 
 syncDB()
   .then(() => app.listen(process.env.PORT || 3001))
