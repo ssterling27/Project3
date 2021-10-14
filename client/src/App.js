@@ -6,6 +6,11 @@ import {
 } from 'react-router-dom'
 import Login from './pages/Auth/Login.js'
 import Register from './pages/Auth/Register.js'
+import Calendar from './pages/Calendar/Calendar.js'
+import Home from './pages/Home/Home.js'
+import AddFriend from './pages/AddFriend/AddFriend.js'
+import Meetup from './pages/Meetup/Meetup.js'
+import Activities from './pages/Activities/Activities.js'
 
 function App() {
   return (
