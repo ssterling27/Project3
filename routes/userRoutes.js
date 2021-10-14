@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken')
 // get user data
 router.get('/user', passport.authenticate('jwt'), (req, res) => res.json(req.user))
 
+// get all users (not password auth)
 router.get('/users', (req, res) => {
  User.find({})
   .then(user => res.json(user))
