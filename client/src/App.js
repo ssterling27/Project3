@@ -26,7 +26,7 @@ function App() {
           <Route path='/register'>
             <Register />
           </Route>
-          {/* <Route path='/calendar'>
+         <Route path='/calendar'>
             <Calendar />
           </Route>
           <Route path='/addfriend'>
@@ -37,7 +37,7 @@ function App() {
           </Route>
           <Route path='/activites'>
             <Activities />
-          </Route> */}
+          </Route>
         </Switch>
       </div>
     </Router>
