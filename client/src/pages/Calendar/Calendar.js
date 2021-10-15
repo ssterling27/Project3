@@ -4,12 +4,14 @@ import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import React, { useState } from 'react'
-import { Button, Modal, Box, Typography, FormGroup, TextField } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import { Button, Modal, Box, Typography, TextField } from '@mui/material'
 // import "react-datepicker/dist/react-datepicker.css";
 import './Calendar.css'
 import { LocalizationProvider, DateTimePicker } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import EventAPI from '../../utils/EventAPI'
+import UserAPI from '../../utils/UserAPI'
 
 const locales = {
   'en-US': require('date-fns/locale/en-US')
@@ -25,31 +27,17 @@ const localizer = dateFnsLocalizer({
 
 const events = [
   {
-    title: 'Class',
-    start: new Date(2021, 9, 15, 10, 15),
-    end: new Date(2021, 9, 15, 11, 30)
-  },
-  {
-    title: 'Vacation',
-    start: new Date(2021, 9, 16),
-    end: new Date(2021, 9, 17),
-    allday: true
-  },
-  {
-    title: 'Conference',
-    start: new Date(2021, 9, 18),
-    end: new Date(2021, 9, 18)
+    title: "sample event",
+    start: new Date(2021, 9, 15, 12),
+    end: new Date(2021, 9, 15, 14)
   }
 ]
 
+
+
+
+
 function Calendar() {
-  const eventTemplate = {
-    title: '',
-    location: '',
-    description: '',
-    start: new Date(),
-    end: new Date()
-  }
   const [newEvent, setNewEvent] = useState({
     title: '',
     location: '',
@@ -57,7 +45,20 @@ function Calendar() {
     start: new Date(),
     end: new Date()
   })
-  const [allEvents, setAllEvents] = useState(events)
+  const [allEvents, setAllEvents] = useState()
+  useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data: { events: getEvents } }) => {
+        getEvents.map((getEvent) => {
+          getEvent.start = new Date(getEvent.start)
+          getEvent.end = new Date(getEvent.end)
+        }) 
+        setAllEvents(getEvents)
+      })
+    console.log(allEvents)
+  }, [])
+
+
 
   // function BasicModal() {
   //   const [open, setOpen] =useState(false);
@@ -75,9 +76,16 @@ function Calendar() {
 
 
   function handleAddEvent() {
-    setAllEvents([...allEvents, newEvent])
-    handleClose()
-    setNewEvent({...newEvent, title: '', location: '', description: '', start: new Date(), end: new Date()})
+    // console.log(allEvents)
+    // console.log(newEvent)
+    EventAPI.create({...newEvent})
+    .then(({ data: e }) => {
+      const es = JSON.parse(JSON.stringify(allEvents.events))
+      setAllEvents( ...allEvents, ...es)
+      handleClose()
+      setNewEvent({ ...newEvent, title: '', location: '', description: '', start: new Date(), end: new Date() })
+    })
+    
   }
 
 const style = {
@@ -94,6 +102,7 @@ const style = {
   return (
     
     <>
+    {console.log(allEvents)}
     <h2 style={{ display: 'flex', justifyContent: 'center' }}>Calendar</h2>
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <Button style={{marginRight: '20px'}} variant="contained" color="success">Schedule Meetup</Button>

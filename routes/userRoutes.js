@@ -30,5 +30,13 @@ router.post('/users/login', (req, res) => {
  })
 })
 
+router.post('/users/addFriend/:id', passport.authenticate('jwt'), async function (req, res) {
+  await User.findByIdAndUpdate(req.user._id, { $push: { friends: req.params.id }})
+  await User.findByIdAndUpdate(req.params.id, { $push: { friends: req.user._id }})
+  res.sendStatus(200)
+} )
+
+// 6169b839d5102ff02f27939f
+
 // export router
 module.exports = router
