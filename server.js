@@ -30,6 +30,7 @@ passport.use(new JwtStrategy({
   // line below is the only one you have to change for project
   .populate('events')
   .populate('friends')
+  .populate('friendRequests')
   .then(user => cb(null, user))
   .catch(err => cb(err))))
 
