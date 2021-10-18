@@ -2,28 +2,18 @@ import * as React from 'react'
 import { Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { MoveToInbox as InboxIcon, Mail as MailIcon } from '@mui/icons-material'
 
-const drawerWidth = 240
+
 
 function Navbar() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
-      >
-        {/* <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Permanent drawer
-          </Typography>
-        </Toolbar> */}
-      </AppBar>
       <Drawer
         sx={{
-          width: drawerWidth,
+          width: '8vw',
           flexShrink: 0,
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: '8vw',
             boxSizing: 'border-box',
           },
         }}
@@ -31,26 +21,27 @@ function Navbar() {
         anchor="left"
       >
         <Toolbar style={{display: 'flex', justifyContent: 'center'}}>
-          <Typography style={{fontSize: '2em'}}>
+          <Typography style={{fontSize: '1.5vw'}}>
           Synergize
         </Typography>
         </Toolbar>
         <Divider />
         <List>
           <ListItem button key='Home'>
-           <ListItemText primary='Home'/>
+            {/* <ListItemText primary='Home' /> */}
+            <li primary='Home' style={{fontSize: '1.2vw'}}>Home</li>
           </ListItem>
           <ListItem button key='Planner'>
-            <ListItemText primary='Planner' />
+            <li primary="Planner" style={{ fontSize: '1.2vw' }}>Planner</li>
           </ListItem>
           <ListItem button key='Friends'>
-            <ListItemText primary='Friends' />
+            <li primary="Friends" style={{ fontSize: '1.2vw' }}>Friends</li>
           </ListItem>
           <ListItem button key='Add Friend'>
-            <ListItemText primary='Add Friend' />
+            <li primary="Add Friend" style={{ fontSize: '1.2vw' }}>Add Friend</li>
           </ListItem>
           <ListItem button key='Activities'>
-            <ListItemText primary='Activities' />
+            <li primary="Activities" style={{ fontSize: '1.2vw' }}>Activities</li>
           </ListItem>
           {/* {['Home', 'Planner', 'Friends', 'Add Friend', 'Activities'].map((text, index) => (
             <ListItem button key={text}>
@@ -62,39 +53,6 @@ function Navbar() {
           ))} */}
         </List>
       </Drawer>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-      >
-        <Toolbar />
-        {/* <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography> */}
-      </Box>
     </Box>
   )
 }

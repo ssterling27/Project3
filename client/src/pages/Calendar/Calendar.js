@@ -12,6 +12,7 @@ import { LocalizationProvider, DateTimePicker } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import EventAPI from '../../utils/EventAPI'
 import UserAPI from '../../utils/UserAPI'
+import addHours from 'date-fns/addHours'
 
 const locales = {
   'en-US': require('date-fns/locale/en-US')
@@ -43,9 +44,9 @@ function Calendar() {
     location: '',
     description: '',
     start: new Date(),
-    end: new Date()
+    end: addHours(new Date(), 1)
   })
-  const [allEvents, setAllEvents] = useState()
+  const [allEvents, setAllEvents] = useState([])
   useEffect(() => {
     UserAPI.getUser()
       .then(({ data: { events: getEvents } }) => {
@@ -78,17 +79,16 @@ function Calendar() {
   function handleAddEvent() {
     // console.log(allEvents)
     // console.log(newEvent)
+    setAllEvents([...allEvents, newEvent])
     EventAPI.create({...newEvent})
     .then(({ data: e }) => {
-      const es = JSON.parse(JSON.stringify(allEvents.events))
-      setAllEvents( ...allEvents, ...es)
-      handleClose()
-      setNewEvent({ ...newEvent, title: '', location: '', description: '', start: new Date(), end: new Date() })
+      console.log(e)
     })
-    
+    setNewEvent({ ...newEvent, title: '', location: '', description: '', start: new Date(), end: addHours(new Date(), 1) })
+    handleClose()
   }
 
-const style = {
+const boxStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -99,10 +99,10 @@ const style = {
   p: 4
 }
 
+
   return (
     
-    <>
-    {console.log(allEvents)}
+    <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh' }}>
     <h2 style={{ display: 'flex', justifyContent: 'center' }}>Calendar</h2>
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <Button style={{marginRight: '20px'}} variant="contained" color="success">Schedule Meetup</Button>
@@ -112,7 +112,7 @@ const style = {
         onClose={handleClose}
         aria-labbeledby='modal-modal-title'
         aria-describedby='modal-modal-description'>
-        <Box sx={style}>
+        <Box sx={boxStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2" style={{display: 'flex', justifyContent: 'center'}}>Add Event</Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div style={{display: 'flex', justifyContent: 'space-around'}}>
@@ -128,7 +128,7 @@ const style = {
                   renderInput={(props) => <TextField variant="outlined" {...props} />}
                   label="Start Time"
                   value={newEvent.start}
-                  onChange={(start) => {setNewEvent({...newEvent, start})}} />
+                  onChange={(start) => {setNewEvent({...newEvent, start: start, end: addHours(start, 1)})}} />
                   <DateTimePicker
                     renderInput={(props) => <TextField variant="outlined" {...props} />}
                     label="End Time"
@@ -150,8 +150,8 @@ const style = {
       events={allEvents}
       startAccessor='start'
       endAccessor='end'
-      style={{ height: 1000, margin: "50px"}} />
-    </>
+      style={{ height: '80vh', margin: "50px"}} />
+    </div>
   )
 }
 

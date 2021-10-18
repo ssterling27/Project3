@@ -2,7 +2,7 @@ import './App.css';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from 'react-router-dom'
 import Login from './pages/Auth/Login.js'
 import Register from './pages/Auth/Register.js'
@@ -11,14 +11,34 @@ import Home from './pages/Home/Home.js'
 import AddFriend from './pages/AddFriend/AddFriend.js'
 import Meetup from './pages/Meetup/Meetup.js'
 import Activities from './pages/Activities/Activities.js'
+import Navbar from './components/Navbar/Navbar.js'
 
 function App() {
+  function removeHash() {
+    window.history.pushState("", document.title, window.location.pathname
+      + window.location.search);
+  }
+  
+ 
+  if (window.location.pathname.length > 1) {
+    let path = window.location.pathname.split('/')[1]
+    window.location.hash = path
+    setTimeout(() => removeHash(), 1000)
+  }
+ 
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path='/'>
+          <Route exact path={'/' | '/calendar' | '/addfriend' | '/meetup' | 'activities'} >
+            <Navbar />
             <Home />
+            <Route>
+            <Calendar />
+            </Route>
+            <AddFriend />
+            <Meetup />
+            <Activities />
           </Route>
           <Route path='/signIn'>
             <Login />
@@ -26,22 +46,11 @@ function App() {
           <Route path='/register'>
             <Register />
           </Route>
-         <Route path='/calendar'>
-            <Calendar />
-          </Route>
-          <Route path='/addfriend'>
-            <AddFriend />
-          </Route>
-          <Route path='/meetup'>
-            <Meetup />
-          </Route>
-          <Route path='/activites'>
-            <Activities />
-          </Route>
         </Switch>
       </div>
     </Router>
-  );
+  )
+  
 }
 
 export default App;
