@@ -17,10 +17,6 @@ const Event = new Schema({
   required: [true, 'Please provide a description']
  },
  // event date
- date: {
-  type: Date,
-  required: [true, 'Please provide a date']
- },
  // start time
  start: {
   type: Date,
