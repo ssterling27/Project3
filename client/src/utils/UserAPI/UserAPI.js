@@ -13,7 +13,8 @@ const UserAPI = {
     headers: {
     Authorization: `Bearer ${localStorage.getItem('token')}`
   }
-})
-searchFriend: query => axios.post('/api/users/search', query)
+}),
+  searchFriend: (query) => axios.post('/api/users/search', query)
+}
 
 export default UserAPI
