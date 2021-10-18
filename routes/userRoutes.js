@@ -106,8 +106,6 @@ router.post('/users/search', (req, res) => {
     .catch(err => { console.log(err) })
 })
 
-} )
-
 // 6169b839d5102ff02f27939f
 
 
