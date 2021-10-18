@@ -26,6 +26,7 @@ function Navbar ({meetupFriendState, setMeetupFriendState, friends, setFriends, 
     // console.log(meetupFriendState)
     window.location.hash = 'meetup'
   }
+  console.log(friendRequestState)
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -68,7 +69,7 @@ function Navbar ({meetupFriendState, setMeetupFriendState, friends, setFriends, 
           <ListItem key='Friend Requests'>
             <li primary="friend requests" style={{fontSize: '1.2vw'}}>Friend Requests</li>
           </ListItem>
-          {/* {friendRequestState.map(friendRequest => (<ListItem style={{display:'flex', justifyContent: 'flex-end'}} button><li style={{fontSize:'1vw'}}>{friendRequest.username}</li></ListItem>))} */}
+          {friendRequestState.map(friendRequest => (<ListItem style={{display:'flex', justifyContent: 'flex-end'}} button><li style={{fontSize:'1vw'}}>{friendRequest.username}</li></ListItem>))}
           <ListItem key='Meetup Requests'>
             <li primary="Meetup requests" style={{ fontSize: '1.2vw' }}>Meetup Requests</li>
           </ListItem>
