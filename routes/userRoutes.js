@@ -30,5 +30,77 @@ router.post('/users/login', (req, res) => {
  })
 })
 
+router.post('/users/requestAddFriend/:id', passport.authenticate('jwt'), async function (req, res) {
+  await User.findByIdAndUpdate(req.user._id, { $push: { friendRequests: req.params.id } })
+  await User.findByIdAndUpdate(req.params.id, { $push: { friendRequests: req.user._id } })
+  res.sendStatus(200)
+})
+
+router.post('/users/requestRemoveFriend/:id', passport.authenticate('jwt'), async function (req, res) {
+  await User.findByIdAndUpdate(req.user._id, { $pull: { friendRequests: req.params.id } })
+  await User.findByIdAndUpdate(req.params.id, { $pull: { friendRequests: req.user._id } })
+  res.sendStatus(200)
+})
+
+// add friends
+router.post('/users/addFriend/:id', passport.authenticate('jwt'), async function (req, res) {
+  await User.findByIdAndUpdate(req.user._id, { $push: { friends: req.params.id }})
+  await User.findByIdAndUpdate(req.params.id, { $push: { friends: req.user._id }})
+  res.sendStatus(200)
+})
+
+router.post('/users/removeFriend/:id', passport.authenticate('jwt'), async function (req, res) {
+  await User.findByIdAndUpdate(req.user._id, { $pull: { friends: req.params.id } })
+  await User.findByIdAndUpdate(req.params.id, { $pull: { friends: req.user._id } })
+  res.sendStatus(200)
+})
+
+router.get('/users/friends/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId)
+    const friends = await Promise.all(
+      user.friends.map(friend => {
+        return User.findById(friend)
+      })
+    )
+    let friendList = []
+    friends.map((friend) => {
+      const {_id, name, username} = friend
+      friendList.push({ _id, name, username })
+    })
+    res.status(200).json(friendList)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
+router.get('/users/requestFriends/:userId', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.userId)
+    const friendRequests = await Promise.all(
+      user.friendRequests.map(friendRequest => {
+        return User.findById(friendRequest)
+      })
+    )
+    let friendRequestList = []
+    friendRequests.map((friendRequest) => {
+      const {_id, name, username} = friendRequest
+      friendRequestList.push({ _id, name, username })
+    })
+    res.status(200).json(friendRequestList)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+})
+
+// search users - passport auth? 
+router.post('/users/search', (req, res) => {
+  let userSearchPattern = new RegExp('^' + req.body.query)
+  User.find({ username: { $regex: userSearchPattern } })
+    .select("_id username")
+    .then(user => { res.json({ user }) })
+    .catch(err => { console.log(err) })
+})
+
 // export router
 module.exports = router
