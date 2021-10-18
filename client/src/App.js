@@ -12,8 +12,22 @@ import AddFriend from './pages/AddFriend/AddFriend.js'
 import Meetup from './pages/Meetup/Meetup.js'
 import Activities from './pages/Activities/Activities.js'
 import Navbar from './components/Navbar/Navbar.js'
+import { useState, useEffect } from 'react'
+import UserAPI from './utils/UserAPI'
 
 function App() {
+  const [friends, setFriends] = useState([])
+  const [friendRequestState, setFriendRequestState] = useState([])
+  const [meetupRequestState, setMeetupRequestState] = useState([])
+  useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data }) => {
+        setFriends(data.friends)
+        setFriendRequestState(data.friendRequests)
+        setMeetupRequestState(data.meetupRequests)
+      })
+  }, [])
+
   function removeHash() {
     window.history.pushState("", document.title, window.location.pathname
       + window.location.search);
@@ -25,13 +39,26 @@ function App() {
     window.location.hash = path
     setTimeout(() => removeHash(), 1000)
   }
- 
+  const [meetupFriendState, setMeetupFriendState] = useState({
+    username: '',
+    id: ''
+  })
+  
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path={'/' | '/calendar' | '/addfriend' | '/meetup' | 'activities'} >
-            <Navbar />
+          <Route exact path={'/' | '/calendar' | '/addfriend' | '/meetup' | '/activities'} >
+            <Navbar
+            meetupFriendState={meetupFriendState}
+            setMeetupFriendState={setMeetupFriendState}
+            friends={friends}
+            setFriends={setFriends}
+            friendRequestState={friendRequestState}
+            setFriendRequestState={setMeetupFriendState}
+            meetupRequestState={meetupRequestState}
+            setMeetupRequestState={setMeetupRequestState}
+            />
             <Home />
             <Route>
             <Calendar />
