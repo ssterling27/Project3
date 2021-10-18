@@ -1,4 +1,4 @@
-const { model, Schema } = require('mongoose')
+const { model, Schema, SchemaTypes } = require('mongoose')
 
 const User = new Schema({
   name: String,
@@ -10,7 +10,11 @@ const User = new Schema({
   friends: [{
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }]
+  }],
+  friendRequests: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
 })
 
 User.plugin(require('passport-local-mongoose'))
