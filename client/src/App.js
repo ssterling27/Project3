@@ -22,9 +22,18 @@ function App() {
   useEffect(() => {
     UserAPI.getUser()
       .then(({ data }) => {
+        console.log(data)
         setFriends(data.friends)
-        setFriendRequestState(data.friendRequests)
-        setMeetupRequestState(data.meetupRequests)
+        // if (data.friendRequests.length > 0) {
+        //   setFriendRequestState(data.friendRequests)
+        // }
+        
+        data.friendRequests.map(friendRequest => {
+          setFriendRequestState([...friendRequestState, {name: friendRequest.name, username: friendRequest.username, id: friendRequest._id}])
+          console.log(friendRequest)
+        })
+        console.log(friendRequestState)
+        // setMeetupRequestState(data.meetupRequests)
       })
   }, [])
 
@@ -63,7 +72,11 @@ function App() {
             <Route>
             <Calendar />
             </Route>
-            <AddFriend />
+            <AddFriend
+            friendRequestState={friendRequestState}
+            setFriendRequestState={setFriendRequestState}
+            friends={friends}
+            />
             <Meetup />
             <Activities />
           </Route>

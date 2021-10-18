@@ -1,10 +1,18 @@
 
 import FriendSearchForm from "../../components/FriendSearch/FriendSearch"
 
-function AddFriend () {
+function AddFriend ({
+  friends,
+  friendRequestState,
+  setFriendRequestState
+}) {
   return (
-    <div id={'addfriend'} style={{ backgroundColor: 'red', height: '100vh', width: '92vw', position: 'relative', float: 'right' }}>
-     <FriendSearchForm />
+    <div id={'addfriend'} style={{ backgroundColor: 'red', height: '100vh', width: '91vw', position: 'relative', float: 'right' }}>
+     <FriendSearchForm
+     friends={friends}
+     friendRequestState={friendRequestState}
+     setFriendRequestState={setFriendRequestState}
+     />
     </div>
   )
 }

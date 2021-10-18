@@ -8,7 +8,11 @@ import UserAPI from '../../utils/UserAPI'
 import axios from 'axios';
 
 
-function FriendSearchForm() {
+function FriendSearchForm({
+  friends,
+  friendRequestState,
+  setFriendRequestState
+}) {
 
  const [open, setOpen] = useState(false)
  const handleOpen = () => setOpen(true);
@@ -19,10 +23,9 @@ function FriendSearchForm() {
  const [userDetails, setUserDetails] = useState([])
 
  const [currentUserState, setCurrentUserState ] = useState([])
- const [friendRequestList, setFriendRequestsList] = useState([])
- const [friendList, setFriendList ] = useState([])
+//  const [friendRequestList, setFriendRequestsList] = useState([])
+//  const [friendList, setFriendList ] = useState([])
 
- const [friended, setFriended] = useState(false)
 
 //  search friend query
  const searchUsers = (query) => {
@@ -35,12 +38,12 @@ function FriendSearchForm() {
    .then(res => res.json())
    .then(results => {
     setUserDetails(results.user)
-    console.log(results.user)
+    // console.log(results.user)
    })
  }
 
-  console.log('User Details from Search: ')
-  console.log(userDetails)
+  // console.log('User Details from Search: ')
+  // console.log(userDetails)
 
   useEffect(() => {
     UserAPI.getUser()
@@ -49,21 +52,11 @@ function FriendSearchForm() {
       // .catch(err => window.location = 'signIn')
   }, [])
 
-  console.log('Current User Details: ')
-  console.log(currentUserState)
-
-  useEffect(() => {
-    UserAPI.getUser()
-      .then(( { data: {friends }}) => {
-        console.log('HERE Friends')
-        console.log(friends)
-        setFriendList(friends)
-      })
-      .catch(err => console.log(err))
-  }, [])
+  // console.log('Current User Details: ')
+  // console.log(currentUserState)
 
   console.log('Friend List: ')
-  console.log(friendList)
+  console.log(friends)
 
   // useEffect(() => {
   //   UserAPI.getUser()
@@ -75,14 +68,20 @@ function FriendSearchForm() {
   //     .catch(err => console.log(err))
   // }, [])
 
-  console.log('Friend Request List:')
-  console.log(friendRequestList)
+  // console.log('Friend Request List:')
+  // console.log(friendRequestList)
 
   const handleInputChange = ({ target: { name, value } }) => setUserDetails({ ...userDetails, [name]: value })
 
   const handleAddFriend = event => {
     event.preventDefault()
     console.log('friend added')
+  }
+
+  const sendFriendRequest = event => {
+    event.preventDefault()
+    console.log(event.target.id)
+    UserAPI.sendFriendRequest(event.target.id)
   }
 
  const style = {
@@ -98,21 +97,21 @@ function FriendSearchForm() {
  }
 
  return (
-  <>
+   <div style={{ margin: '2vw' }}>
   <h1>Current Signed In User:</h1>
   <h3>Profile ID: {currentUserState._id}</h3>
   <h3>Profile Username: {currentUserState.username}</h3>
   <h3>Profile Name: {currentUserState.name}</h3>
   <h1> Friends: </h1>
   <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    {friendList.map(friend => {
+    {friends.map(friend => {
       return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }} />Username: {friend.username} / Name: {friend.name} / ID: {friend._id}</ListItem>
     })}
   </List>
   <h1> Friend Requests: </h1>
   <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    {friendRequestList.map(friendRequest => {
-      return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }} />Username: {friendRequest} / Name: {friendRequest.name} / ID: {friendRequest._id}</ListItem>
+    {friendRequestState.map(friendRequest => {
+      return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }} />Username: {friendRequest.username} / Name: {friendRequest.name} / ID: {friendRequest.id}</ListItem>
     })}
   </List>
    <h2 style={{ display: 'flex', justifyContent: 'center' }}>Search Friend</h2>
@@ -131,7 +130,7 @@ function FriendSearchForm() {
        </div>
        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         {userDetails.map(item => {
-          return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }} />{item.username} / {item._id} <Button variant="contained" onClick={handleAddFriend}>Add Friend</Button></ListItem>
+          return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }}>{item.username}</ListItemText><Button id={item._id} variant="contained" onClick={sendFriendRequest}>Add Friend</Button></ListItem>
         })}
        </List>
        <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -140,7 +139,7 @@ function FriendSearchForm() {
      </Box>
     </Modal>
    </div>
-  </>
+  </div>
  )
 }
 
