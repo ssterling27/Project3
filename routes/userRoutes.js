@@ -30,6 +30,7 @@ router.post('/users/login', (req, res) => {
  })
 })
 
+
 router.post('/users/requestAddFriend/:id', passport.authenticate('jwt'), async function (req, res) {
   await User.findByIdAndUpdate(req.user._id, { $push: { friendRequests: req.params.id } })
   await User.findByIdAndUpdate(req.params.id, { $push: { friendRequests: req.user._id } })
@@ -43,10 +44,13 @@ router.post('/users/requestRemoveFriend/:id', passport.authenticate('jwt'), asyn
 })
 
 // add friends
+
+
 router.post('/users/addFriend/:id', passport.authenticate('jwt'), async function (req, res) {
   await User.findByIdAndUpdate(req.user._id, { $push: { friends: req.params.id }})
   await User.findByIdAndUpdate(req.params.id, { $push: { friends: req.user._id }})
   res.sendStatus(200)
+
 })
 
 router.post('/users/removeFriend/:id', passport.authenticate('jwt'), async function (req, res) {
@@ -101,6 +105,11 @@ router.post('/users/search', (req, res) => {
     .then(user => { res.json({ user }) })
     .catch(err => { console.log(err) })
 })
+
+} )
+
+// 6169b839d5102ff02f27939f
+
 
 // export router
 module.exports = router

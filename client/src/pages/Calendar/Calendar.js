@@ -4,12 +4,15 @@ import parse from 'date-fns/parse'
 import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import React, { useState } from 'react'
-import { Button, Modal, Box, Typography, FormGroup, TextField } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import { Button, Modal, Box, Typography, TextField } from '@mui/material'
 // import "react-datepicker/dist/react-datepicker.css";
 import './Calendar.css'
 import { LocalizationProvider, DateTimePicker } from '@mui/lab'
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import EventAPI from '../../utils/EventAPI'
+import UserAPI from '../../utils/UserAPI'
+import addHours from 'date-fns/addHours'
 
 const locales = {
   'en-US': require('date-fns/locale/en-US')
@@ -25,39 +28,38 @@ const localizer = dateFnsLocalizer({
 
 const events = [
   {
-    title: 'Class',
-    start: new Date(2021, 9, 15, 10, 15),
-    end: new Date(2021, 9, 15, 11, 30)
-  },
-  {
-    title: 'Vacation',
-    start: new Date(2021, 9, 16),
-    end: new Date(2021, 9, 17),
-    allday: true
-  },
-  {
-    title: 'Conference',
-    start: new Date(2021, 9, 18),
-    end: new Date(2021, 9, 18)
+    title: "sample event",
+    start: new Date(2021, 9, 15, 12),
+    end: new Date(2021, 9, 15, 14)
   }
 ]
 
+
+
+
+
 function Calendar() {
-  const eventTemplate = {
-    title: '',
-    location: '',
-    description: '',
-    start: new Date(),
-    end: new Date()
-  }
   const [newEvent, setNewEvent] = useState({
     title: '',
     location: '',
     description: '',
     start: new Date(),
-    end: new Date()
+    end: addHours(new Date(), 1)
   })
-  const [allEvents, setAllEvents] = useState(events)
+  const [allEvents, setAllEvents] = useState([])
+  useEffect(() => {
+    UserAPI.getUser()
+      .then(({ data: { events: getEvents } }) => {
+        getEvents.map((getEvent) => {
+          getEvent.start = new Date(getEvent.start)
+          getEvent.end = new Date(getEvent.end)
+        }) 
+        setAllEvents(getEvents)
+      })
+    console.log(allEvents)
+  }, [])
+
+
 
   // function BasicModal() {
   //   const [open, setOpen] =useState(false);
@@ -75,12 +77,18 @@ function Calendar() {
 
 
   function handleAddEvent() {
+    // console.log(allEvents)
+    // console.log(newEvent)
     setAllEvents([...allEvents, newEvent])
+    EventAPI.create({...newEvent})
+    .then(({ data: e }) => {
+      console.log(e)
+    })
+    setNewEvent({ ...newEvent, title: '', location: '', description: '', start: new Date(), end: addHours(new Date(), 1) })
     handleClose()
-    setNewEvent({...newEvent, title: '', location: '', description: '', start: new Date(), end: new Date()})
   }
 
-const style = {
+const boxStyle = {
   position: 'absolute',
   top: '50%',
   left: '50%',
@@ -91,9 +99,10 @@ const style = {
   p: 4
 }
 
+
   return (
     
-    <>
+    <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh' }}>
     <h2 style={{ display: 'flex', justifyContent: 'center' }}>Calendar</h2>
     <div style={{display: 'flex', justifyContent: 'center'}}>
       <Button style={{marginRight: '20px'}} variant="contained" color="success">Schedule Meetup</Button>
@@ -103,7 +112,7 @@ const style = {
         onClose={handleClose}
         aria-labbeledby='modal-modal-title'
         aria-describedby='modal-modal-description'>
-        <Box sx={style}>
+        <Box sx={boxStyle}>
           <Typography id="modal-modal-title" variant="h6" component="h2" style={{display: 'flex', justifyContent: 'center'}}>Add Event</Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <div style={{display: 'flex', justifyContent: 'space-around'}}>
@@ -119,7 +128,7 @@ const style = {
                   renderInput={(props) => <TextField variant="outlined" {...props} />}
                   label="Start Time"
                   value={newEvent.start}
-                  onChange={(start) => {setNewEvent({...newEvent, start})}} />
+                  onChange={(start) => {setNewEvent({...newEvent, start: start, end: addHours(start, 1)})}} />
                   <DateTimePicker
                     renderInput={(props) => <TextField variant="outlined" {...props} />}
                     label="End Time"
@@ -141,8 +150,8 @@ const style = {
       events={allEvents}
       startAccessor='start'
       endAccessor='end'
-      style={{ height: 1000, margin: "50px"}} />
-    </>
+      style={{ height: '80vh', margin: "50px"}} />
+    </div>
   )
 }
 
