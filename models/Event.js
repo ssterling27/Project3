@@ -37,10 +37,11 @@ const Event = new Schema({
   trim: true,
  },
  // reference user model
- user: {
+ users: [{
   type: Schema.Types.ObjectId,
   ref: 'User'
- }
+ }],
+//  reference the other friends involved in the event
 }, { timestamps: true })
 
 // export model Event

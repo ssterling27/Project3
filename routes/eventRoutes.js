@@ -3,7 +3,7 @@ const { Event, User } = require('../models')
 const passport = require('passport')
 
 router.post('/events', passport.authenticate('jwt'), async function (req, res) {
-  const event = await Event.create({ ...req.body, user: req.user._id })
+  const event = await Event.create({ ...req.body, users: [req.user._id] })
   await User.findByIdAndUpdate(req.user._id, { $push: { events: event._id } })
   res.json(event)
 })
