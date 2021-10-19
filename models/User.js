@@ -15,6 +15,10 @@ const User = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User'
   }],
+  meetupRequests: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Event'
+  }]
 })
 
 User.plugin(require('passport-local-mongoose'))
