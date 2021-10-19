@@ -2,6 +2,8 @@ import * as React from 'react'
 import { Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import { MoveToInbox as InboxIcon, Mail as MailIcon } from '@mui/icons-material'
 import { useState, useEffect } from 'react'
+import FriendRequestModal from '../FriendRequestModal/FriendRequestModal.js'
+import FriendInfoModal from '../FriendInfoModal/FriendInfoModal.js'
 
 
 
@@ -26,6 +28,25 @@ function Navbar ({meetupFriendState, setMeetupFriendState, friends, setFriends, 
     // console.log(meetupFriendState)
     window.location.hash = 'meetup'
   }
+
+    const [friendOpen, setFriendOpen] = useState(false)
+    const openFriendRequest = () => setFriendOpen(true)
+    const closeFriendRequest = () => setFriendOpen(false)
+    const [friendInfoOpen, setFriendInfoOpen] = useState(false)
+    const openFriendModal = () => setFriendInfoOpen(true)
+    const closeFriendModal = () => setFriendInfoOpen(false)
+
+  const modalStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'white',
+    border: '2px solid grey',
+    p: 4
+  }
+
   console.log(friendRequestState)
   return (
     <Box sx={{ display: 'flex' }}>
@@ -59,7 +80,18 @@ function Navbar ({meetupFriendState, setMeetupFriendState, friends, setFriends, 
           <ListItem key='Friends'>
             <li primary="Friends" style={{ fontSize: '1.2vw' }}>Friends</li>
           </ListItem>
-          {friends.map(friend => (<ListItem style={{display: 'flex', justifyContent: 'flex-end'}} button onClick={meetupFriend}><li primary={friend.username} style={{fontSize: '1vw'}} id={friend._id}>{friend.username}</li></ListItem>))}
+          {friends.map(friend => (<><ListItem style={{display: 'flex', justifyContent: 'flex-end'}} button onClick={openFriendModal}><li primary={friend.username} style={{fontSize: '1vw'}}>{friend.username}</li></ListItem>
+          <FriendInfoModal
+            friendInfoOpen={friendInfoOpen}
+            setFriendInfoOpen={setFriendInfoOpen}
+            openFriendModal={openFriendModal}
+            closeFriendModal={closeFriendModal}
+            modalStyle={modalStyle}
+            username={friend.username}
+            user_id={friend._id}
+            friends={friends}
+            setFriends={setFriends} />
+          </>))}
           <ListItem button key='Add Friend' onClick={goAddFriend}>
             <li primary="Add Friend" style={{ fontSize: '1.2vw' }}>Add Friend</li>
           </ListItem>
@@ -69,7 +101,19 @@ function Navbar ({meetupFriendState, setMeetupFriendState, friends, setFriends, 
           <ListItem key='Friend Requests'>
             <li primary="friend requests" style={{fontSize: '1.2vw'}}>Friend Requests</li>
           </ListItem>
-          {friendRequestState.map(friendRequest => (<ListItem style={{display:'flex', justifyContent: 'flex-end'}} button><li style={{fontSize:'1vw'}}>{friendRequest.username}</li></ListItem>))}
+          {friendRequestState.map(({ username, id, name}, index) => (
+          <FriendRequestModal
+            friendOpen={friendOpen}
+            setFriendOpen={setFriendOpen}
+            openFriendRequest={openFriendRequest}
+            closeFriendRequest={closeFriendRequest}
+            modalStyle={modalStyle}
+            username={username}
+            user_id={id}
+            friendRequestState={friendRequestState}
+            setFriendRequestState={setFriendRequestState}
+            friends={friends}
+            setFriends={setFriends} />))}
           <ListItem key='Meetup Requests'>
             <li primary="Meetup requests" style={{ fontSize: '1.2vw' }}>Meetup Requests</li>
           </ListItem>

@@ -28,7 +28,10 @@ passport.use(new JwtStrategy({
   secretOrKey: process.env.SECRET
 }, ({ id }, cb) => User.findById(id)
   // line below is the only one you have to change for project
-  .populate('events', 'friends', 'friendRequests', 'meetupRequests')
+  .populate('events')
+  .populate('friends')
+  .populate('friendRequests')
+  .populate('meetupRequests')
   .then(user => cb(null, user))
   .catch(err => cb(err))))
 
