@@ -16,6 +16,12 @@ import { useState, useEffect } from 'react'
 import UserAPI from './utils/UserAPI'
 
 function App() {
+  const sendFriendRequest = (event) => {
+    event.preventDefault()
+    UserAPI.sendFriendRequest(event.target.id)
+      .then(user => console.log('request made'))
+      .catch(err => console.log(err))
+  }
   const [friends, setFriends] = useState([])
   const [friendRequestState, setFriendRequestState] = useState([])
   const [meetupRequestState, setMeetupRequestState] = useState([])
@@ -29,21 +35,24 @@ function App() {
         // }
         
         data.friendRequests.map(friendRequest => {
-          setFriendRequestState([...friendRequestState, {name: friendRequest.name, username: friendRequest.username, id: friendRequest._id}])
+          friendRequestState.push({ username: friendRequest.username, name: friendRequest.name, id: friendRequest._id})
           console.log(friendRequest)
         })
-        console.log(friendRequestState)
+        // setFriendRequestState([{username: 'John'}, {username: 'Jack'}])
+        setFriendRequestState([...friendRequestState])
+        // setFriendRequestState(data.friendRequests)
         // setMeetupRequestState(data.meetupRequests)
       })
   }, [])
 
+  console.log(friendRequestState)
   function removeHash() {
     window.history.pushState("", document.title, window.location.pathname
       + window.location.search);
   }
   
  
-  if (window.location.pathname.length > 1) {
+  if (window.location.pathname === 'calendar' || 'addfriend' || 'meetup' || 'activities') {
     let path = window.location.pathname.split('/')[1]
     window.location.hash = path
     setTimeout(() => removeHash(), 1000)
@@ -57,6 +66,12 @@ function App() {
     <Router>
       <div>
         <Switch>
+          <Route path='/signIn'>
+            <Login />
+          </Route>
+          <Route path='/register'>
+            <Register />
+          </Route>
           <Route exact path={'/' | '/calendar' | '/addfriend' | '/meetup' | '/activities'} >
             <Navbar
             meetupFriendState={meetupFriendState}
@@ -64,7 +79,7 @@ function App() {
             friends={friends}
             setFriends={setFriends}
             friendRequestState={friendRequestState}
-            setFriendRequestState={setMeetupFriendState}
+            setFriendRequestState={setFriendRequestState}
             meetupRequestState={meetupRequestState}
             setMeetupRequestState={setMeetupRequestState}
             />
@@ -76,15 +91,10 @@ function App() {
             friendRequestState={friendRequestState}
             setFriendRequestState={setFriendRequestState}
             friends={friends}
+            sendFriendRequest={sendFriendRequest}
             />
             <Meetup />
             <Activities />
-          </Route>
-          <Route path='/signIn'>
-            <Login />
-          </Route>
-          <Route path='/register'>
-            <Register />
           </Route>
         </Switch>
       </div>

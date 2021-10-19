@@ -11,7 +11,8 @@ import axios from 'axios';
 function FriendSearchForm({
   friends,
   friendRequestState,
-  setFriendRequestState
+  setFriendRequestState,
+  sendFriendRequest
 }) {
 
  const [open, setOpen] = useState(false)
@@ -78,11 +79,7 @@ function FriendSearchForm({
     console.log('friend added')
   }
 
-  const sendFriendRequest = event => {
-    event.preventDefault()
-    console.log(event.target.id)
-    UserAPI.sendFriendRequest(event.target.id)
-  }
+  
 
  const style = {
   position: 'absolute',

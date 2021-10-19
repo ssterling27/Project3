@@ -32,26 +32,27 @@ router.post('/users/login', (req, res) => {
 
 
 
-router.post('/users/requestAddFriend/:id', passport.authenticate('jwt'), async function (req, res) {
+router.put('/users/requestAddFriend/:id', passport.authenticate('jwt'), async function (req, res) {
   // await User.findByIdAndUpdate(req.user._id, { $push: { friendRequests: req.params.id } })
   await User.findByIdAndUpdate(req.params.id, { $push: { friendRequests: req.user._id } })
   res.sendStatus(200)
 })
 
-router.post('/users/requestRemoveFriend/:id', passport.authenticate('jwt'), async function (req, res) {
+router.put('/users/requestRemoveFriend/:id', passport.authenticate('jwt'), async function (req, res) {
   await User.findByIdAndUpdate(req.user._id, { $pull: { friendRequests: req.params.id } })
-  await User.findByIdAndUpdate(req.params.id, { $pull: { friendRequests: req.user._id } })
+  // await User.findByIdAndUpdate(req.params.id, { $pull: { friendRequests: req.user._id } })
   res.sendStatus(200)
 })
 
 // add friends
 
 
-router.post('/users/addFriend/:id/:requestid', passport.authenticate('jwt'), async function (req, res) {
-  await User.findByIdAndUpdate(req.user._id, { $push: { friends: req.params.id }, $pull: {friendRequests: req.params.requestid}})
+router.post('/users/addFriend/:id', passport.authenticate('jwt'), async function (req, res) {
+  await User.findByIdAndUpdate(req.user._id, { $push: { friends: req.params.id }})
+  await User.findByIdAndUpdate(req.user._id, { $pull: { friendRequests: req.params.id }})
   await User.findByIdAndUpdate(req.params.id, { $push: { friends: req.user._id }})
-  res.sendStatus(200)
-
+  const friend = await User.findById(req.params.id)
+  res.json(friend)
 })
 
 router.post('/users/removeFriend/:id', passport.authenticate('jwt'), async function (req, res) {
