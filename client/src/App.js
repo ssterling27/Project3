@@ -14,8 +14,24 @@ import Activities from './pages/Activities/Activities.js'
 import Navbar from './components/Navbar/Navbar.js'
 import { useState, useEffect } from 'react'
 import UserAPI from './utils/UserAPI'
-
+import { format, parse, getDay, startOfToday} from 'date-fns'
+import {dateFnsLocalizer} from 'react-big-calendar'
+import {LocalizationProvider} from '@mui/lab'
+import startOfWeek from 'date-fns/startOfWeek';
+const locales = {
+  'en-US': require('date-fns/locale/en-US')
+}
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales
+})
 function App() {
+  const [allEvents, setAllEvents] = useState([])
+  const unavailableHours = []
+  const [selectedDay, setSelectedDay] = useState(startOfToday())
   const sendFriendRequest = (event) => {
     event.preventDefault()
     UserAPI.sendFriendRequest(event.target.id)
@@ -97,7 +113,10 @@ function App() {
             />
             <Home />
             <Route>
-            <Calendar />
+            <Calendar
+            allEvents={allEvents}
+            setAllEvents={setAllEvents}
+            unavailableHours={unavailableHours} />
             </Route>
             <AddFriend
             friendRequestState={friendRequestState}
@@ -105,7 +124,14 @@ function App() {
             friends={friends}
             sendFriendRequest={sendFriendRequest}
             />
-            <Meetup />
+            <Meetup 
+            selectedFriendState={selectedFriendState}
+            setSelectedFriendState={setSelectedFriendState}
+            friends={friends}
+            allEvents={allEvents}
+            setAllEvents={setAllEvents}
+            selectedDay={selectedDay}
+            setSelectedDay={setSelectedDay} />
             <Activities />
           </Route>
         </Switch>

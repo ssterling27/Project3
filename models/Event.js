@@ -41,6 +41,12 @@ const Event = new Schema({
   type: Schema.Types.ObjectId,
   ref: 'User'
  }],
+ day: {
+   type: String
+ },
+ hours: [{
+   type: Number
+ }]
 //  reference the other friends involved in the event
 }, { timestamps: true })
 

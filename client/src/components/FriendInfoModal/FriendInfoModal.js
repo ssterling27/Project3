@@ -11,11 +11,12 @@ function FriendInfoModal ({
   selectedFriendState,
   setSelectedFriendState,
   friends,
-  setFriends
+  setFriends,
+  goMeetupPage
 }) {
-  const scheduleMeetup = () => {
-    closeFriendModal()
-    document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+  async function scheduleMeetup () {
+    await goMeetupPage()
+    setTimeout(() => closeFriendModal(), 500)
   }
 
   const removeFriend = () => {

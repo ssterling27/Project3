@@ -114,7 +114,8 @@ function Navbar({ meetupFriendState, setMeetupFriendState, friends, setFriends, 
             selectedFriendState={selectedFriendState}
             setSelectedFriendState={setSelectedFriendState}
             friends={friends}
-            setFriends={setFriends} />
+            setFriends={setFriends}
+            goMeetupPage={goMeetupPage}/>
           <ListItem button key='Add Friend' onClick={goAddFriend}>
             <li primary="Add Friend" style={{ fontSize: '1.2vw' }}>Add Friend</li>
           </ListItem>
