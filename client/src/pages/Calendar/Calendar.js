@@ -13,6 +13,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import EventAPI from '../../utils/EventAPI'
 import UserAPI from '../../utils/UserAPI'
 import addHours from 'date-fns/addHours'
+import {} from 'date-fns'
 
 const locales = {
   'en-US': require('date-fns/locale/en-US')
@@ -38,15 +39,21 @@ const events = [
 
 
 
-function Calendar() {
+function Calendar({
+  allEvents,
+  setAllEvents,
+  unavailableHours
+}) {
   const [newEvent, setNewEvent] = useState({
     title: '',
     location: '',
     description: '',
     start: new Date(),
-    end: addHours(new Date(), 1)
+    end: addHours(new Date(), 1),
+    day: format(new Date(), 'MM-dd-yyyy'),
+    hours: []
   })
-  const [allEvents, setAllEvents] = useState([])
+  
   useEffect(() => {
     UserAPI.getUser()
       .then(({ data: { events: getEvents } }) => {
@@ -56,7 +63,7 @@ function Calendar() {
         }) 
         setAllEvents(getEvents)
       })
-    console.log(allEvents)
+    console.log(newEvent)
   }, [])
 
 
@@ -79,15 +86,28 @@ function Calendar() {
   function handleAddEvent() {
     // console.log(allEvents)
     // console.log(newEvent)
+    let startHour = parseInt(format(newEvent.start, 'HH'))
+    let endHour = parseInt(format(newEvent.end, 'HH'))
+    let duration = endHour - startHour
+    let totalHours = []
+    if (duration > 1) {
+      for (let i = 0; i < duration; i++) {
+        totalHours.push((startHour + i))
+        newEvent.hours.push((startHour + i))
+      }
+    } else {
+      newEvent.hours.push(startHour)
+    }
     setAllEvents([...allEvents, newEvent])
     EventAPI.create({...newEvent})
     .then(({ data: e }) => {
       console.log(e)
     })
-    setNewEvent({ ...newEvent, title: '', location: '', description: '', start: new Date(), end: addHours(new Date(), 1) })
+    setNewEvent({
+      ...newEvent, title: '', location: '', description: '', start: new Date(), end: addHours(new Date(), 1), day: format(new Date(), 'MM-dd-yyyy'), hours: [] })
     handleClose()
   }
-
+  
 const boxStyle = {
   position: 'absolute',
   top: '50%',
@@ -128,7 +148,7 @@ const boxStyle = {
                   renderInput={(props) => <TextField variant="outlined" {...props} />}
                   label="Start Time"
                   value={newEvent.start}
-                  onChange={(start) => {setNewEvent({...newEvent, start: start, end: addHours(start, 1)})}} />
+                    onChange={(start) => { setNewEvent({ ...newEvent, start: start, end: addHours(start, 1), day: format(start, 'MM-dd-yyyy')})}} />
                   <DateTimePicker
                     renderInput={(props) => <TextField variant="outlined" {...props} />}
                     label="End Time"
