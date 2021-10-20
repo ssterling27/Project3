@@ -24,16 +24,15 @@ function FriendSearchForm({
  const [userDetails, setUserDetails] = useState([])
 
  const [currentUserState, setCurrentUserState ] = useState([])
-//  const [friendRequestList, setFriendRequestsList] = useState([])
-//  const [friendList, setFriendList ] = useState([])
-
 
 //  search friend query
  const searchUsers = (query) => {
   setSearchState(query)
   fetch('/api/users/search', {
    method: 'POST',
-   headers: { 'Content-Type': 'application/json' },
+   headers: { 
+     'Content-Type': 'application/json',
+     Authorization: `Bearer ${localStorage.getItem('token')}`},
    body: JSON.stringify({ query: query })
   })
    .then(res => res.json())
@@ -43,44 +42,13 @@ function FriendSearchForm({
    })
  }
 
-  // console.log('User Details from Search: ')
-  // console.log(userDetails)
-
   useEffect(() => {
     UserAPI.getUser()
       .then(( { data: { _id, name, username }} ) => setCurrentUserState({ ...currentUserState, _id: _id, name: name, username: username }))
       .catch(console.log('error'))
       // .catch(err => window.location = 'signIn')
   }, [])
-
-  // console.log('Current User Details: ')
-  // console.log(currentUserState)
-
-  // console.log('Friend List: ')
-  // console.log(friends)
-
-  // useEffect(() => {
-  //   UserAPI.getUser()
-  //     .then(({ data: { friendRequests }}) => {
-  //       console.log('HERE FriendRequests')
-  //       console.log(friendRequests)
-  //       setFriendRequestsList([friendRequests])
-  //     })
-  //     .catch(err => console.log(err))
-  // }, [])
-
-  // console.log('Friend Request List:')
-  // console.log(friendRequestList)
-
-  const handleInputChange = ({ target: { name, value } }) => setUserDetails({ ...userDetails, [name]: value })
-
-  const handleAddFriend = event => {
-    event.preventDefault()
-    console.log('friend added')
-  }
-
   
-
  const style = {
   position: 'absolute',
   top: '50%',
