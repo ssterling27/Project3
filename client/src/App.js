@@ -25,27 +25,37 @@ function App() {
   const [friends, setFriends] = useState([])
   const [friendRequestState, setFriendRequestState] = useState([])
   const [meetupRequestState, setMeetupRequestState] = useState([])
+  const [selectedFriendState, setSelectedFriendState] = useState({
+    name: '',
+    username: 'Select a Friend',
+    id: ''
+  })
+  const incomingRequests = []
   useEffect(() => {
     UserAPI.getUser()
       .then(({ data }) => {
         console.log(data)
         setFriends(data.friends)
+
         // if (data.friendRequests.length > 0) {
         //   setFriendRequestState(data.friendRequests)
         // }
         
         data.friendRequests.map(friendRequest => {
-          friendRequestState.push({ username: friendRequest.username, name: friendRequest.name, id: friendRequest._id})
-          console.log(friendRequest)
+          incomingRequests.push({ username: friendRequest.username, name: friendRequest.name, id: friendRequest._id})
         })
         // setFriendRequestState([{username: 'John'}, {username: 'Jack'}])
-        setFriendRequestState([...friendRequestState])
+        setFriendRequestState([...incomingRequests])
         // setFriendRequestState(data.friendRequests)
         // setMeetupRequestState(data.meetupRequests)
       })
   }, [])
 
-  console.log(friendRequestState)
+  // useEffect(() => {
+    
+  //   console.log(friendRequestState)
+  // }, [])
+  
   function removeHash() {
     window.history.pushState("", document.title, window.location.pathname
       + window.location.search);
@@ -82,6 +92,8 @@ function App() {
             setFriendRequestState={setFriendRequestState}
             meetupRequestState={meetupRequestState}
             setMeetupRequestState={setMeetupRequestState}
+            selectedFriendState={selectedFriendState}
+            setSelectedFriendState={setSelectedFriendState}
             />
             <Home />
             <Route>
