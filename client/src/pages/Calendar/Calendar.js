@@ -105,7 +105,7 @@ const boxStyle = {
     <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh' }}>
     <h2 style={{ display: 'flex', justifyContent: 'center' }}>Calendar</h2>
     <div style={{display: 'flex', justifyContent: 'center'}}>
-      <Button style={{marginRight: '20px'}} variant="contained" color="success">Schedule Meetup</Button>
+        <Button style={{ marginRight: '20px' }} variant="contained" color="success" onClick={() => document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })}>Schedule Meetup</Button>
       <Button variant="contained" onClick={handleOpen}>Add Event</Button>
       <Modal
         open={open}

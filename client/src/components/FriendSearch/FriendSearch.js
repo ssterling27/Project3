@@ -56,8 +56,8 @@ function FriendSearchForm({
   // console.log('Current User Details: ')
   // console.log(currentUserState)
 
-  console.log('Friend List: ')
-  console.log(friends)
+  // console.log('Friend List: ')
+  // console.log(friends)
 
   // useEffect(() => {
   //   UserAPI.getUser()
