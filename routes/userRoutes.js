@@ -100,7 +100,7 @@ router.get('/users/requestFriends/:userId', async (req, res) => {
 })
 
 // search users - passport auth? 
-router.post('/users/search', (req, res) => {
+router.post('/users/search', passport.authenticate('jwt'),(req, res) => {
   let userSearchPattern = new RegExp('^' + req.body.query)
   User.find({ username: { $regex: userSearchPattern } })
     .select("_id username")
@@ -110,6 +110,17 @@ router.post('/users/search', (req, res) => {
 
 // 6169b839d5102ff02f27939f
 
+router.get('/usernames', (req, res) => {
+  // find all users
+  User.find({})
+    .then(users => {
+      // assign usernames to an empty array and push each user to array
+      let usernames = []
+      users.forEach(user => { usernames.push(user.username)})
+      res.json(usernames)
+    })
+    .catch(err => console.log(err))
+})
 
 // export router
 module.exports = router
