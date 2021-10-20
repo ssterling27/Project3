@@ -8,15 +8,22 @@ function FriendInfoModal ({
   openFriendModal,
   closeFriendModal,
   modalStyle,
-  username,
-  user_id,
+  selectedFriendState,
+  setSelectedFriendState,
   friends,
   setFriends
 }) {
-  const scheduleMeetup = () => {}
+  const scheduleMeetup = () => {
+    closeFriendModal()
+    document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+  }
 
-  const removeFriend = () => {}
-
+  const removeFriend = () => {
+  UserAPI.removeFriend(selectedFriendState.id)
+    setFriends(friends.filter(friend => friend._id !== selectedFriendState.id))
+    setSelectedFriendState({name: '', username: '', id: ''})
+  closeFriendModal()
+}
   return (
     <Modal
       open={friendInfoOpen}
@@ -24,9 +31,11 @@ function FriendInfoModal ({
       aria-labbeledby='modal-modal-title'
       aria-describedby='modal-modal-description'>
       <Box sx={modalStyle}>
-        <Typography id="modal-modal-title" variant="h6" component="h2" style={{ display: 'flex', justifyContent: 'center' }}>{username}</Typography>
+        <Typography id="modal-modal-title" variant="h5" component="h2" style={{ display: 'flex', justifyContent: 'center' }}>{selectedFriendState.name}</Typography>
+        <Typography id="modal-modal-title" variant="h6" component="h2" style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>Better known as</Typography>
+        <Typography id="modal-modal-title" variant="h4" component="h2" style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>{selectedFriendState.username}</Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <div style={{display: 'flex', justifyContent: 'space-around'}}>
           <Button variant="contained" style={{ marginTop: '20px' }} onClick={scheduleMeetup}>Schedule Meetup</Button>
           <Button variant="outlined" color="error" style={{ marginTop: '20px' }} onClick={removeFriend}>Remove Friend</Button>
           </div>

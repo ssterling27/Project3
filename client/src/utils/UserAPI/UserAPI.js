@@ -27,6 +27,12 @@ const UserAPI = {
     }
   }),
   searchFriend: (query) => axios.post('/api/users/search', query),
+  removeFriend: (user_id) => axios.post(`/api/users/removeFriend/${user_id}`, {}, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
+    }
+  })
 }
 
 export default UserAPI
