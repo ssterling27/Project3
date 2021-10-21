@@ -73,6 +73,8 @@ export default function LogInForm() {
       <Grid container spacing={2}>
        <Grid item xs={12}>
         <TextField
+         error={userState.username === ''}
+         helperText={userState.username === '' ? 'Please enter a username' : ''}
          required
          fullWidth
          id="username"
@@ -84,6 +86,8 @@ export default function LogInForm() {
        </Grid>
        <Grid item xs={12}>
         <TextField
+         error={userState.password === ''}
+         helperText={userState.password === '' ? 'Please enter a password' : ''}
          required
          fullWidth
          name="password"
@@ -101,6 +105,7 @@ export default function LogInForm() {
        fullWidth
        variant="contained"
        sx={{ mt: 3, mb: 3 }}
+       disabled={!userState.username || !userState.password}
       >
        Log In
       </Button>
