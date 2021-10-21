@@ -40,7 +40,13 @@ const Meetup = new Schema({
   sentTo: {
     type: Schema.Types.ObjectId,
     ref: 'User'
-  }
+  },
+  day: {
+    type: String
+  },
+  hours: [{
+    type: Number
+  }]
 }, { timestamps: true })
 
 module.exports = model('Meetup', Meetup)
