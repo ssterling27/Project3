@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
@@ -17,6 +17,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import UserAPI from '../../utils/UserAPI'
 
+import axios from 'axios'
+
 function RegisterFooter(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -33,6 +35,19 @@ const theme = createTheme();
 
 export default function RegisterForm() {
 
+  const [usernamesState, setUsernamesState] = useState([])
+
+  // grab all the usernames to check and prevent duplicates during registration (add to API but testing here first)
+  useEffect(() => {
+    axios.get('/api/usernames')
+      .then(({ data: usernames }) => {
+        setUsernamesState({ ...usernamesState, usernames })
+      })
+      .catch(err => console.log(err))
+  }, [])
+
+  console.log(usernamesState.usernames)
+
   const [userState, setUserState] = useState({
     name: '',
     username: '',
@@ -43,13 +58,18 @@ export default function RegisterForm() {
 
   const handleRegisterUser = event => {
     event.preventDefault()
-    UserAPI.register(userState)
-      .then(() => {
-        alert('User Registered! Sign In Now')
-        setUserState({ ...userState, name: '', username: '', password: '' })
-        window.location = '/signIn'
-      })
-      .catch(err => console.error(err))
+    // check if the user's proposed username already exists in the current usernames from db (lowercase all to check for dups)
+    if (usernamesState.usernames.indexOf(userState.username.toLowerCase()) !== -1) {
+      console.log('username already exists')
+    } else {
+      UserAPI.register(userState)
+        .then(() => {
+          alert('User Registered! Sign In Now')
+          setUserState({ ...userState, name: '', username: '', password: '' })
+          window.location = '/signIn'
+        })
+        .catch(err => console.error(err))
+    }
   }
 
   return (
@@ -74,6 +94,8 @@ export default function RegisterForm() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  error={userState.name === ''}
+                  helperText={userState.name === '' ? 'Please enter a name' : ''}
                   autoComplete="given-name"
                   name="name"
                   required
@@ -87,6 +109,8 @@ export default function RegisterForm() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  error={userState.username === '' || usernamesState.usernames.indexOf(userState.username.toLowerCase()) !== -1 }
+                  helperText={userState.username === '' ? 'Please enter a username' : '' || usernamesState.usernames.indexOf(userState.username.toLowerCase()) !== -1 ? 'Username already exists - Please choose another' : ''}
                   required
                   fullWidth
                   id="username"
@@ -98,6 +122,8 @@ export default function RegisterForm() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  error={userState.password === ''}
+                  helperText={userState.password === '' ? 'Please enter a password' : ''}
                   required
                   fullWidth
                   name="password"
@@ -115,6 +141,7 @@ export default function RegisterForm() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 3 }}
+              disabled={!userState.name || !userState.username || !userState.password || usernamesState.usernames.indexOf(userState.username.toLowerCase()) !== -1}
             >
               Register
             </Button>
