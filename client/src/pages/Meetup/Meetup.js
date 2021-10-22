@@ -14,6 +14,7 @@ import getDay from 'date-fns/getDay';
 import addHours from 'date-fns/addHours'
 import {} from 'date-fns'
 import MeetupAPI from '../../utils/MeetupAPI'
+import './Meetup.css'
 
 const locales = {
   'en-US': require('date-fns/locale/en-US')
@@ -157,6 +158,7 @@ function Meetup({
   
   return (
     <div id={'meetup'} style={{ height: '100vh', width: '91vw', position: 'relative', float: 'right' }}>
+      <div style={{ position: 'relative', zIndex: 2 }}>
       <div style={{display: 'flex', justifyContent: 'center'}}>
       <h2>Schedule a Meetup</h2>
       </div>
@@ -235,6 +237,7 @@ function Meetup({
             </Typography>
           </Box>
         </Modal>
+      </div>
       </div>
     </div>
   )

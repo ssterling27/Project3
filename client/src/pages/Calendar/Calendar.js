@@ -14,7 +14,7 @@ import EventAPI from '../../utils/EventAPI'
 import UserAPI from '../../utils/UserAPI'
 import addHours from 'date-fns/addHours'
 import {} from 'date-fns'
-
+import sunVector from '../../images/sun-vector.svg'
 const locales = {
   'en-US': require('date-fns/locale/en-US')
 }
@@ -65,7 +65,7 @@ function Calendar({
   const [open, setOpen] = useState(false)
    const handleOpen = () => setOpen(true);
    const handleClose = () => setOpen(false);
-
+  
 
   function handleAddEvent() {
     // console.log(allEvents)
@@ -107,7 +107,8 @@ const boxStyle = {
   return (
     
     <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh' }}>
-    <h2 style={{ display: 'flex', justifyContent: 'center' }}>Calendar</h2>
+     <div style={{position: 'relative', zIndex: 2}}>
+    <h2 style={{ display: 'flex', justifyContent: 'center'}}>Calendar</h2>
     <div style={{display: 'flex', justifyContent: 'center'}}>
         <Button style={{ marginRight: '20px' }} variant="contained" color="success" onClick={() => document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })}>Schedule Meetup</Button>
       <Button variant="contained" onClick={handleOpen}>Add Event</Button>
@@ -155,7 +156,8 @@ const boxStyle = {
       startAccessor='start'
       endAccessor='end'
       style={{ height: '80vh', margin: "50px"}} />
-    </div>
+      </div>
+      </div>
   )
 }
 
