@@ -15,8 +15,12 @@ import UserAPI from '../../utils/UserAPI'
 import addHours from 'date-fns/addHours'
 import {} from 'date-fns'
 
+import sunVector from '../../images/sun-vector.svg'
+
+
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+
 
 
 const locales = {
@@ -69,7 +73,7 @@ function Calendar({
   const [open, setOpen] = useState(false)
    const handleOpen = () => setOpen(true);
    const handleClose = () => setOpen(false);
-
+  
 
   function handleAddEvent() {
     // console.log(allEvents)
@@ -109,8 +113,8 @@ const boxStyle = {
 
 
   return (
-    
-    <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh'}}>
+    <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh' }}>
+      <div style={{position: 'relative', zIndex: 2}}>
       <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw' }}>
         <h1>Calendar</h1>
       </Paper>
@@ -161,6 +165,8 @@ const boxStyle = {
       startAccessor='start'
       endAccessor='end'
       style={{ height: '80vh', margin: "50px"}} />
+      </div>
+      </div>
     </div>
   )
 }

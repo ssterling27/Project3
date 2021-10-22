@@ -1,8 +1,10 @@
-import { Button, Paper, Box, Typography, Grid, Card, CardActionArea, CardActions, CardContent, CardMedia } from '@mui/material'
 
+import { Button, Paper, Box, Typography, Grid, Card, CardActionArea, CardActions, CardContent, CardMedia } from '@mui/material'
+import './Activities.css'
 function Activities() {
   return (
-    <div id={'activities'} style={{ backgroundColor: 'yellow', height: '100vh', width: '92vw', position: 'relative', float: 'right' }}>
+    <div id={'activities'} style={{ height: '100vh', width: '92vw', position: 'relative', float: 'right' }}>
+    <div style={{ position: 'relative', zIndex: 2 }}>
       <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw' }}>
         <h1>Activities</h1>
       </Paper>
@@ -28,6 +30,7 @@ function Activities() {
           </CardActions>
         </Card>
       </Grid>
+  </div>
     </div>
 
   )

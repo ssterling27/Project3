@@ -1,0 +1,24 @@
+<svg version="1.2" baseProfile="tiny-ps" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1984 1766" width="1984" height="1766">
+	<title>sun-465936-svg</title>
+	<defs>
+		<filter x="-50%" y="-50%" width="200%" height="200%" id="flt1"> <feGaussianBlur stdDeviation="100.582" /> </filter>
+		<filter x="-50%" y="-50%" width="200%" height="200%" id="flt2"> <feGaussianBlur stdDeviation="69.765" /> </filter>
+		<linearGradient id="grd1" gradientUnits="userSpaceOnUse"  x1="1025.108" y1="840.134" x2="1025.108" y2="1074.433">
+			<stop offset="0" stop-color="#ffffff"  />
+			<stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+		</linearGradient>
+	</defs>
+	<style>
+		tspan { white-space:pre }
+		.shp0 { filter: url(#flt1);fill: #ff6600 } 
+		.shp1 { filter: url(#flt2);fill: #ffff00 } 
+		.shp2 { fill: #ffff00 } 
+		.shp3 { fill: url(#grd1) } 
+	</style>
+	<g id="Layer">
+		<path id="Layer" class="shp0" d="M1585.16 874.41C1585.16 1029.39 1523.6 1178.02 1414.01 1287.6C1304.43 1397.18 1155.8 1458.74 1000.83 1458.74C845.86 1458.74 697.23 1397.18 587.65 1287.6C478.06 1178.02 416.5 1029.39 416.5 874.41C416.5 719.44 478.06 570.81 587.65 461.23C697.23 351.65 845.86 290.09 1000.83 290.09C1155.8 290.09 1304.43 351.65 1414.01 461.23C1523.6 570.81 1585.16 719.44 1585.16 874.41L1585.16 874.41Z" />
+		<path id="Layer" class="shp1" d="M1473.73 874.36C1473.73 1135.51 1262.04 1347.21 1000.89 1347.21C739.74 1347.21 528.04 1135.51 528.04 874.36C528.04 613.21 739.74 401.52 1000.89 401.52C1262.04 401.52 1473.73 613.21 1473.73 874.36L1473.73 874.36Z" />
+		<path id="Layer" class="shp2" d="M1399.41 874.42C1399.41 1094.55 1220.96 1273 1000.83 1273C780.7 1273 602.25 1094.55 602.25 874.42C602.25 654.29 780.7 475.84 1000.83 475.84C1220.96 475.84 1399.41 654.29 1399.41 874.42L1399.41 874.42Z" />
+		<path id="Layer" class="shp3" d="M1399.41 874.42C1399.41 1094.55 1220.96 1273 1000.83 1273C780.7 1273 602.25 1094.55 602.25 874.42C602.25 654.29 780.7 475.84 1000.83 475.84C1220.96 475.84 1399.41 654.29 1399.41 874.42L1399.41 874.42Z" />
+	</g>
+</svg>

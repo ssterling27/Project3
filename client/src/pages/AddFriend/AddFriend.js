@@ -1,5 +1,6 @@
 
 import FriendSearchForm from "../../components/FriendSearch/FriendSearch"
+import './AddFriend.css'
 
 function AddFriend ({
   friends,
@@ -12,7 +13,8 @@ function AddFriend ({
   closeFriendRequestSent
 }) {
   return (
-    <div id={'addfriend'} style={{ backgroundColor: 'red', height: '100vh', width: '91vw', position: 'relative', float: 'right' }}>
+    <div id={'addfriend'} style={{ height: '100vh', width: '91vw', position: 'relative', float: 'right' }}>
+      <div style={{ position: 'relative', zIndex: 2 }}>
      <FriendSearchForm
      friends={friends}
      friendRequestState={friendRequestState}
@@ -23,6 +25,7 @@ function AddFriend ({
       openFriendRequestSent={openFriendRequestSent}
        closeFriendRequestSent={closeFriendRequestSent}
      />
+    </div>
     </div>
   )
 }

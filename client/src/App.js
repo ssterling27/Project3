@@ -7,6 +7,7 @@ import {
 import Login from './pages/Auth/Login.js'
 import Register from './pages/Auth/Register.js'
 import Calendar from './pages/Calendar/Calendar.js'
+import Parallax from './pages/Parallax/Parallax.js'
 import Home from './pages/Home/Home.js'
 import AddFriend from './pages/AddFriend/AddFriend.js'
 import Meetup from './pages/Meetup/Meetup.js'
@@ -139,6 +140,7 @@ function App() {
               allEvents={allEvents}
               setAllEvents={setAllEvents}
             />
+            <Parallax />
             <Home />
             <Route>
               <Calendar

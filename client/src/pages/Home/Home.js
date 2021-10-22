@@ -1,4 +1,7 @@
 import React, { useState, useEffect, Component } from 'react'
+import './Home.css'
+import sunVector from '../../images/sun-vector.svg'
+import SynergizeLogo from '../../images/Synergize-Logo-10.png'
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -20,7 +23,8 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 function Home() {
   return (
-    <div id={'home'} style={{ backgroundColor: 'blue', height: '100vh', width: '92vw', position: 'relative', float: 'right'}}>
+    <div id={'home'} style={{ height: '100vh', width: '92vw', position: 'relative', float: 'right'}}>
+      <div style={{ marginTop: '25vh', display: 'flex', justifyContent: 'center', width: '92vw', position: 'relative', float: 'right', zIndex: '2'}}>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <StyledToolbar>
