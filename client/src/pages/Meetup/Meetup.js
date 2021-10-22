@@ -240,7 +240,6 @@ function Meetup({
       </div>
       </div>
     </div>
-    </div>
   )
 }
 
