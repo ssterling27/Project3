@@ -31,26 +31,18 @@ function FriendSearchForm({
 
 //  search friend query
  const searchUsers = (query) => {
-  setSearchState(query)
-  fetch('/api/users/search', {
-   method: 'POST',
-   headers: { 
-     'Content-Type': 'application/json',
-     Authorization: `Bearer ${localStorage.getItem('token')}`},
-   body: JSON.stringify({ query: query })
-  })
-   .then(res => res.json())
-   .then(results => {
-    setUserDetails(results.user)
-    // console.log(results.user)
-   })
+   setSearchState(query)
+   console.log(searchState)
+   UserAPI.searchFriend(JSON.stringify({query: query}))
+    .then(res => setUserDetails(res.data.user))
+    .catch(err => console.log(err))
  }
 
   useEffect(() => {
     UserAPI.getUser()
       .then(( { data: { _id, name, username }} ) => setCurrentUserState({ ...currentUserState, _id: _id, name: name, username: username }))
-      .catch(console.log('error'))
-      // .catch(err => window.location = 'signIn')
+      // .catch(console.log('error'))
+      .catch(err => window.location = 'signIn')
   }, [])
   
  const style = {
