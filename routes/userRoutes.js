@@ -55,23 +55,11 @@ router.post('/users/register', (req, res) => {
 
 // login a user
 router.post('/users/login', (req, res) => {
- User.authenticate()(req.body.username, req.body.password, (err, user) => {
-  if (err) { console.log(err) }
-  res.json(user ? jwt.sign({ id: user._id }, process.env.SECRET) : null)
- })
+  User.authenticate()(req.body.username.toLowerCase(), req.body.password, (err, user) => {
+    if (err) { console.log(err) }
+    res.json(user ? jwt.sign({ id: user._id }, process.env.SECRET) : null)
+  })
 })
-
-//  ---------- USE THIS FOR THE PROD instead of user login route above (change all values to lowercase to prevent duplicates as done during registration) -----------
-
-// router.post('/users/login', (req, res) => {
-//   User.authenticate()(req.body.username.toLowerCase(), req.body.password, (err, user) => {
-//     if (err) { console.log(err) }
-//     res.json(user ? jwt.sign({ id: user._id }, process.env.SECRET) : null)
-//   })
-// })
-
-//  ---------- USE ABOVE FOR PROD -----------
-
 
 
 router.put('/users/requestAddFriend/:id', passport.authenticate('jwt'), async function (req, res) {
