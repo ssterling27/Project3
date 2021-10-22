@@ -25,7 +25,8 @@ function Home() {
   return (
     <div id={'home'} style={{ height: '100vh', width: '92vw', position: 'relative', float: 'right'}}>
       <div style={{ marginTop: '25vh', display: 'flex', justifyContent: 'center', width: '92vw', position: 'relative', float: 'right', zIndex: '2'}}>
-      <Box sx={{ flexGrow: 1 }}>
+        <img src={SynergizeLogo} alt={'Synergize'} style={{width: '50vw'}} />
+      {/* <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <StyledToolbar>
             <Typography
@@ -78,7 +79,8 @@ function Home() {
             </Box>
           </Grid>
         </Grid>
-      </Paper>
+      </Paper> */}
+    </div>
     </div>
   )
 }

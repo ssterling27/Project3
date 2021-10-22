@@ -167,7 +167,6 @@ const boxStyle = {
       style={{ height: '80vh', margin: "50px"}} />
       </div>
       </div>
-    </div>
   )
 }
 
