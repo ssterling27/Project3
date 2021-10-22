@@ -15,6 +15,10 @@ import UserAPI from '../../utils/UserAPI'
 import addHours from 'date-fns/addHours'
 import {} from 'date-fns'
 
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+
+
 const locales = {
   'en-US': require('date-fns/locale/en-US')
 }
@@ -106,11 +110,13 @@ const boxStyle = {
 
   return (
     
-    <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh' }}>
-    <h2 style={{ display: 'flex', justifyContent: 'center' }}>Calendar</h2>
+    <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh'}}>
+      <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw' }}>
+        <h1>Calendar</h1>
+      </Paper>
     <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Button style={{ marginRight: '20px' }} variant="contained" color="success" onClick={() => document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })}>Schedule Meetup</Button>
-      <Button variant="contained" onClick={handleOpen}>Add Event</Button>
+        <Button style={{ marginRight: '20px' }} variant="contained" style={{ backgroundColor: 'white', color: 'black', marginRight: '1%' }} onClick={() => document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })}>Schedule Meetup</Button>
+        <Button variant="contained" style={{ backgroundColor: '#78797B', color: 'white', marginLeft: '1%' }} onClick={handleOpen}>Add Event</Button>
       <Modal
         open={open}
         onClose={handleClose}
