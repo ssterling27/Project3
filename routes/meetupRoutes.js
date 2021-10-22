@@ -13,6 +13,7 @@ router.post('/acceptMeetupRequest/:userid/:meetupid', passport.authenticate('jwt
   const event = await Event.create({...req.body, users: [req.user._id, req.params.userid] })
   await User.findByIdAndUpdate(req.user._id, { $push: { events: event._id }})
   await User.findByIdAndUpdate(req.params.userid, { $push: { events: event._id }})
+  await User.findByIdAndUpdate(req.user._id, { $pull: { meetupRequests: req.params.meetupid } })
   await Meetup.findByIdAndDelete(req.params.meetupid)
   res.json(event)
 })
