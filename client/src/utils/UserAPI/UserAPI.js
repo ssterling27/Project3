@@ -26,7 +26,12 @@ const UserAPI = {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   }),
-  searchFriend: (query) => axios.post('/api/users/search', query),
+  searchFriend: query => axios.post('/api/users/search', query, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'application/json'
+    }
+  }),
   removeFriend: (user_id) => axios.post(`/api/users/removeFriend/${user_id}`, {}, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
