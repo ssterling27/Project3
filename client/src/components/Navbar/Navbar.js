@@ -6,8 +6,8 @@ import FriendRequestModal from '../FriendRequestModal/FriendRequestModal.js'
 import FriendInfoModal from '../FriendInfoModal/FriendInfoModal.js'
 import MeetupRequestModal from '../MeetupRequestModal/MeetupRequestModal.js'
 
-
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import HomeIcon from '@mui/icons-material/Home';
 
 function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setFriends, friendRequestState, setFriendRequestState, meetupRequestState, setMeetupRequestState, selectedFriendState, setSelectedFriendState, allMeetupRequests, setAllMeetupRequests, newEvent, setNewEvent, allEvents, setAllEvents }) {
   function goHome(event) {
@@ -24,6 +24,10 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
   }
   function goMeetupPage() {
     document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
+  }
+  function logOut() {
+    localStorage.removeItem('token')
+    window.location = '/signIn'
   }
  
 
@@ -103,7 +107,7 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
         <List>
           <ListItem button key='Home' onClick={goHome}>
             {/* <ListItemText primary='Home' /> */}
-            <li primary='Home' style={{ fontSize: '1.2vw' }}>Home</li>
+            <li primary='Home' style={{ fontSize: '1.2vw' }}>{<HomeIcon />} </li>
           </ListItem>
           <ListItem button key='Planner' onClick={goCalendar}>
             <li primary="Planner" style={{ fontSize: '1.2vw' }}>Planner</li>
@@ -177,6 +181,11 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
               <ListItemText primary={text} />
             </ListItem>
           ))} */}
+          <hr />
+          <ListItem button key='logOut' onClick={logOut}>
+            {/* <ListItemText primary='Home' /> */}
+            <li primary='LogOut' style={{ fontSize: '1.2vw' }}>{<LogoutIcon />} </li>
+          </ListItem>
         </List>
       </Drawer>
     </Box>
