@@ -27,32 +27,16 @@ const localizer = dateFnsLocalizer({
   locales
 })
 
-const events = [
-  {
-    title: "sample event",
-    start: new Date(2021, 9, 15, 12),
-    end: new Date(2021, 9, 15, 14)
-  }
-]
-
-
-
 
 
 function Calendar({
   allEvents,
   setAllEvents,
-  unavailableHours
+  unavailableHours,
+  newEvent,
+  setNewEvent
 }) {
-  const [newEvent, setNewEvent] = useState({
-    title: '',
-    location: '',
-    description: '',
-    start: new Date(),
-    end: addHours(new Date(), 1),
-    day: format(new Date(), 'MM-dd-yyyy'),
-    hours: []
-  })
+  
   
   useEffect(() => {
     UserAPI.getUser()

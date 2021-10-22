@@ -4,11 +4,12 @@ import { MoveToInbox as InboxIcon, Mail as MailIcon } from '@mui/icons-material'
 import { useState, useEffect } from 'react'
 import FriendRequestModal from '../FriendRequestModal/FriendRequestModal.js'
 import FriendInfoModal from '../FriendInfoModal/FriendInfoModal.js'
+import MeetupRequestModal from '../MeetupRequestModal/MeetupRequestModal.js'
 
 
 
 
-function Navbar({ meetupFriendState, setMeetupFriendState, friends, setFriends, friendRequestState, setFriendRequestState, meetupRequestState, setMeetupRequestState, selectedFriendState, setSelectedFriendState }) {
+function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setFriends, friendRequestState, setFriendRequestState, meetupRequestState, setMeetupRequestState, selectedFriendState, setSelectedFriendState, allMeetupRequests, setAllMeetupRequests, newEvent, setNewEvent, allEvents, setAllEvents }) {
   function goHome(event) {
     document.getElementById("home").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
   }
@@ -26,19 +27,21 @@ function Navbar({ meetupFriendState, setMeetupFriendState, friends, setFriends, 
   }
  
 
-  function meetupFriend(event) {
-    setMeetupFriendState({ username: event.target.childNodes[0].innerText || event.target.innerText, id: event.target.childNodes[0].id || event.target.id })
-    // console.log(meetupFriendState)
-    window.location.hash = 'meetup'
-  }
-
+  // function meetupFriend(event) {
+  //   setMeetupFriendState({ username: event.target.childNodes[0].innerText || event.target.innerText, id: event.target.childNodes[0].id || event.target.id })
+  //   // console.log(meetupFriendState)
+  //   window.location.hash = 'meetup'
+  // }
+  
   const [friendOpen, setFriendOpen] = useState(false)
   const openFriendRequest = () => setFriendOpen(true)
   const closeFriendRequest = () => setFriendOpen(false)
   const [friendInfoOpen, setFriendInfoOpen] = useState(false)
   const openFriendModal = () => setFriendInfoOpen(true)
   const closeFriendModal = () => setFriendInfoOpen(false)
-
+  const [meetupRequestOpen, setMeetupRequestOpen] = useState(false)
+  const openMeetupRequest = () => setMeetupRequestOpen(true)
+  const closeMeetupRequest = () => setMeetupRequestOpen(false)
   const modalStyle = {
     position: 'absolute',
     top: '50%',
@@ -71,6 +74,10 @@ function Navbar({ meetupFriendState, setMeetupFriendState, friends, setFriends, 
       id: id
     })
     openFriendRequest()
+  }
+  const viewMeetupRequest = (meetupRequest) => {
+    setSelectedMeetupRequest(meetupRequest)
+    openMeetupRequest()
   }
   return (
     <Box sx={{ display: 'flex' }}>
@@ -146,7 +153,22 @@ function Navbar({ meetupFriendState, setMeetupFriendState, friends, setFriends, 
           <ListItem key='Meetup Requests'>
             <li primary="Meetup requests" style={{ fontSize: '1.2vw' }}>Meetup Requests</li>
           </ListItem>
-          {/* {meetupRequestState.map(meetupRequest => (<ListItem style={{ display: 'flex', justifyContent: 'flex-end' }} button><li style={{ fontSize: '1vw' }}>{meetupRequest.username}</li></ListItem>))} */}
+          {allMeetupRequests.map(meetupRequest => (<ListItem style={{ display: 'flex', justifyContent: 'flex-end' }} button onClick={() => viewMeetupRequest(meetupRequest)}><li style={{ fontSize: '1vw' }}>{meetupRequest.sentBy.username}</li></ListItem>))}
+          <MeetupRequestModal
+            meetupRequestOpen={meetupRequestOpen}
+            setMeetupRequestOpen={setMeetupRequestOpen}
+            openMeetupRequest={openMeetupRequest}
+            closeMeetupRequest={closeMeetupRequest}
+            modalStyle={modalStyle}
+            selectedMeetupRequest={selectedMeetupRequest}
+            setSelectedMeetupRequest={setSelectedMeetupRequest}
+            allMeetupRequests={allMeetupRequests}
+            setAllMeetupRequests={setAllMeetupRequests}
+            newEvent={newEvent}
+            setNewEvent={setNewEvent}
+            allEvents={allEvents}
+            setAllEvents={setAllEvents} />
+
           {/* {['Home', 'Planner', 'Friends', 'Add Friend', 'Activities'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>

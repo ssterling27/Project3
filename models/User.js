@@ -17,7 +17,7 @@ const User = new Schema({
   }],
   meetupRequests: [{
     type: Schema.Types.ObjectId,
-    ref: 'Event'
+    ref: 'Meetup'
   }]
 })
 

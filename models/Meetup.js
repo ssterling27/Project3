@@ -34,9 +34,17 @@ const Meetup = new Schema({
   },
   // reference user model
   sentBy: {
+    id: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
+    username: {
+      type: String
+    },
+    name: {
+      type: String
+    }
+},
   sentTo: {
     type: Schema.Types.ObjectId,
     ref: 'User'

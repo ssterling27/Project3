@@ -5,7 +5,11 @@ function AddFriend ({
   friends,
   friendRequestState,
   setFriendRequestState,
-  sendFriendRequest
+  sendFriendRequest,
+  friendRequestSent,
+  setFriendRequestSent,
+  openFriendRequestSent,
+  closeFriendRequestSent
 }) {
   return (
     <div id={'addfriend'} style={{ backgroundColor: 'red', height: '100vh', width: '91vw', position: 'relative', float: 'right' }}>
@@ -14,6 +18,10 @@ function AddFriend ({
      friendRequestState={friendRequestState}
      setFriendRequestState={setFriendRequestState}
      sendFriendRequest={sendFriendRequest}
+      friendRequestSent={friendRequestSent}
+      setFriendRequestSent={setFriendRequestSent}
+      openFriendRequestSent={openFriendRequestSent}
+       closeFriendRequestSent={closeFriendRequestSent}
      />
     </div>
   )
