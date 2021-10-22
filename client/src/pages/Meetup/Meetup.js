@@ -157,12 +157,12 @@ function Meetup({
 // console.log(openTimes)
   
   return (
-    <div id={'meetup'} style={{ height: '100vh', width: '91vw', position: 'relative', float: 'right' }}>
+    <div id={'meetup'} style={{ height: '100vh', width: '91vw', position: 'relative', float: 'right'}}>
       <div style={{ position: 'relative', zIndex: 2 }}>
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-      <h2>Schedule a Meetup</h2>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw' }}>
+          <h1>Schedule a meetup</h1>
+        </Paper>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}>
         <FriendDropdown
           selectedFriendState={selectedFriendState}
           setSelectedFriendState={setSelectedFriendState}
@@ -176,14 +176,14 @@ function Meetup({
           </LocalizationProvider>
       </div>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <Button variant="contained" color="success" style={{marginTop: '20px'}} onClick={findEvents}>Find Available Times</Button>
+        <Button variant="contained" style={{ marginTop: '20px', backgroundColor: '#78797B', color: 'white'}} onClick={findEvents}>Find Available Times</Button>
       </div>
       <div style={{ marginTop: '2%', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '70vh', marginRight: '2%', marginLeft: '2%' }}>
         <Grid container spacing={2}>
         {availableTimes.map(hour => (
           <Grid item xs={6}>
             <Paper className={classes.paper}>
-          <Button variant="contained" onClick={() => openMeetupModal(hour)} style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', width: '100%', }}>{(hour > 12) ? `${hour - 12} PM` : ``}{(hour < 12) ? `${hour} AM` : ''}{(hour === 12) ? `12 PM` : ''}</Button></Paper></Grid>
+              <Button variant="contained" onClick={() => openMeetupModal(hour)} style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', width: '100%', backgroundColor: 'white', color: 'black' }}>{(hour > 12) ? `${hour - 12} PM` : ``}{(hour < 12) ? `${hour} AM` : ''}{(hour === 12) ? `12 PM` : ''}</Button></Paper></Grid>
         ))}
         </Grid>
         <Modal
@@ -239,6 +239,7 @@ function Meetup({
         </Modal>
       </div>
       </div>
+    </div>
     </div>
   )
 }
