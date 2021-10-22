@@ -44,9 +44,14 @@ export default function LogInForm() {
   event.preventDefault()
   UserAPI.login(userState)
    .then(({ data: token }) => {
-    localStorage.setItem('token', token)
-    setUserState({ ...userState, username: '', password: '' })
-    window.location = '/'
+    //  console.log(token)
+     if (token) {
+       localStorage.setItem('token', token)
+       setUserState({ ...userState, username: '', password: '' })
+       window.location = '/'  
+     } else {
+       alert('Invalid username and/or password')
+     }
    })
    .catch(err => console.error(err))
  }
