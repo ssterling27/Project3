@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const MeetupAPI = {
-  sendMeetupRequest: (meetup, user_id) => axios.post(`/api/sendMeetupRequest/${user_id}`, {
+  sendMeetupRequest: (meetup, user_id) => axios.post(`/api/sendMeetupRequest/${user_id}`, meetup, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
   }

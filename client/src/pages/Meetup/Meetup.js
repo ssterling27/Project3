@@ -13,6 +13,7 @@ import startOfWeek from 'date-fns/startOfWeek';
 import getDay from 'date-fns/getDay';
 import addHours from 'date-fns/addHours'
 import {} from 'date-fns'
+import MeetupAPI from '../../utils/MeetupAPI'
 
 const locales = {
   'en-US': require('date-fns/locale/en-US')
@@ -45,6 +46,9 @@ function Meetup({
     border: '2px solid grey',
     p: 4
   }
+  const [requestModalOpen, setRequestModalOpen] = useState(false)
+  const openRequestSent = () => setRequestModalOpen(true)
+  const closeRequestSent = () => setRequestModalOpen(false)
   const [meetupModalOpen, setMeetupModalOpen] = useState(false)
   const handleOpen = () => setMeetupModalOpen(true);
   const handleClose = () => setMeetupModalOpen(false);
@@ -111,6 +115,37 @@ function Meetup({
       })
       handleOpen()
     }
+    const sendMeetupRequest = () => {
+      let startHour = parseInt(format(newMeetup.start, 'HH'))
+      let endHour = parseInt(format(newMeetup.end, 'HH'))
+      let duration = endHour - startHour
+      let totalHours = []
+      if (duration > 1) {
+        for (let i = 0; i < duration; i++) {
+          totalHours.push((startHour + i))
+          newMeetup.hours.push((startHour + i))
+        }
+      } else {
+        newMeetup.hours.push(startHour)
+      }
+      // console.log(newMeetup, selectedFriendState.id)
+    MeetupAPI.sendMeetupRequest(newMeetup, selectedFriendState.id)
+    .then(({data}) => {
+      setNewMeetup({...newMeetup,
+        title: '',
+        location: '',
+        description: '',
+        start: new Date(),
+        end: addHours(new Date(), 1),
+        day: '',
+        hours: [],
+        sentBy: {}
+      })
+        handleClose()
+      openRequestSent()
+    })
+    }
+    
  useEffect(() => {
    console.log(availableTimes)
  }, [availableTimes])
@@ -181,7 +216,21 @@ function Meetup({
               <DateTimePicker placeholderText="End Date" selected={newEvent.end} onChange={(end) => setNewEvent({ ...newEvent, end })} /> */}
               </div>
               <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <Button variant="contained" style={{ marginTop: '20px' }}>Add</Button>
+                <Button variant="contained" style={{ marginTop: '20px' }} onClick={sendMeetupRequest}>Send Meetup Request</Button>
+              </div>
+            </Typography>
+          </Box>
+        </Modal>
+        <Modal
+          open={requestModalOpen}
+          onClose={closeRequestSent}
+          aria-labbeledby='modal-modal-title'
+          aria-describedby='modal-modal-description'>
+          <Box sx={boxStyle}>
+            <Typography id="modal-modal-title" variant="h6" component="h2" style={{ display: 'flex', justifyContent: 'center' }}>Your Meetup Request has been sent! It'll show up in your calendar when your friend accepts.</Typography>
+            <Typography>
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <Button variant="outlined" color="success" style={{ marginTop: '20px' }} onClick={closeRequestSent}>Got it</Button>
               </div>
             </Typography>
           </Box>

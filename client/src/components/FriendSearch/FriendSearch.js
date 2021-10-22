@@ -12,7 +12,11 @@ function FriendSearchForm({
   friends,
   friendRequestState,
   setFriendRequestState,
-  sendFriendRequest
+  sendFriendRequest,
+  friendRequestSent,
+  setFriendRequestSent,
+  openFriendRequestSent,
+  closeFriendRequestSent
 }) {
 
  const [open, setOpen] = useState(false)
@@ -58,7 +62,6 @@ function FriendSearchForm({
   bgcolor: 'white',
   border: '2px solid grey',
   p: 4,
-  overflow: 'scroll',
  }
 
  return (
@@ -95,7 +98,9 @@ function FriendSearchForm({
        </div>
        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         {userDetails.map(item => {
-          return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }}>{item.username}</ListItemText><Button id={item._id} variant="contained" onClick={sendFriendRequest}>Add Friend</Button></ListItem>
+          return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }}>{item.username}</ListItemText><Button id={item._id} variant="contained" onClick={event => {
+            handleClose()
+            sendFriendRequest(event)}}>Add Friend</Button></ListItem>
         })}
        </List>
        <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -104,6 +109,20 @@ function FriendSearchForm({
      </Box>
     </Modal>
    </div>
+     <Modal
+       open={friendRequestSent}
+       onClose={closeFriendRequestSent}
+       aria-labbeledby='modal-modal-title'
+       aria-describedby='modal-modal-description'>
+       <Box sx={style}>
+         <Typography id="modal-modal-title" variant="h6" component="h2" style={{ display: 'flex', justifyContent: 'center' }}>Your Friend Request has been sent! They'll show up in your Friends list if they accept.</Typography>
+         <Typography>
+           <div style={{ display: 'flex', justifyContent: 'center' }}>
+             <Button variant="outlined" color="success" style={{ marginTop: '20px' }} onClick={closeFriendRequestSent}>Got it</Button>
+           </div>
+         </Typography>
+       </Box>
+     </Modal>
   </div>
  )
 }
