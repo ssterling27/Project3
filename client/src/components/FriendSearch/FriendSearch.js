@@ -7,6 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import UserAPI from '../../utils/UserAPI'
 import axios from 'axios';
 
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 
 function FriendSearchForm({
   friends,
@@ -58,25 +60,50 @@ function FriendSearchForm({
 
  return (
    <div style={{ margin: '2vw' }}>
-  <h1>Current Signed In User:</h1>
-  <h3>Profile ID: {currentUserState._id}</h3>
-  <h3>Profile Username: {currentUserState.username}</h3>
-  <h3>Profile Name: {currentUserState.name}</h3>
-  <h1> Friends: </h1>
-  <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    {friends.map(friend => {
-      return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }} />Username: {friend.username} / Name: {friend.name} / ID: {friend._id}</ListItem>
-    })}
-  </List>
-  <h1> Friend Requests: </h1>
-  <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-    {friendRequestState.map(friendRequest => {
-      return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }} />Username: {friendRequest.username} / Name: {friendRequest.name} / ID: {friendRequest.id}</ListItem>
-    })}
-  </List>
-   <h2 style={{ display: 'flex', justifyContent: 'center' }}>Search Friend</h2>
+     <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center'}}>
+       <h1>{currentUserState.username}: Add a friend</h1>
+     </Paper>
+     <br />
+     <div style={{ display: 'flex', justifyContent: 'center' }}>
+       <Button variant="contained" style={{ backgroundColor: '#78797B', color: 'white', marginBottom: '2%' }} onClick={handleOpen}>Search Friend</Button>
+     </div>
+     <hr />
+     <Grid container spacing={2} style={{ marginTop: '2%'}}>
+       <Grid item xs={6} md={6}>
+         <Paper elevation={8} style={{display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center'}}>
+           Friends
+         </Paper>
+       </Grid>
+       <Grid item xs={6} md={6}>
+         <Paper elevation={8} style={{display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center'}}>
+           Friend Requests
+         </Paper>
+       </Grid>
+     </Grid>
+
+     <Grid container spacing={2} style={{marginTop: '2%', justifyContent: 'center'}}>
+       <Grid item xs={6} md={6}>
+         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center' }}>
+           <List>
+             {friends.map(friend => {
+               return <ListItem><ListItemText style={{ color: 'black' }} />Username: {friend.username} / Name: {friend.name}</ListItem>
+             })}
+           </List>
+         </Paper>
+       </Grid>
+       <Grid item xs={6} md={6}>
+         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center' }}>
+           <List>
+             {friendRequestState.map(friendRequest => {
+               return <ListItem><ListItemText style={{ color: 'black' }} />Username: {friendRequest.username} / Name: {friendRequest.name}</ListItem>
+             })}
+           </List>
+         </Paper>
+       </Grid>
+     </Grid>
+
    <div style={{ display: 'flex', justifyContent: 'center' }}>
-    <Button variant="contained" onClick={handleOpen}>Search Friend</Button>
+    {/* <Button variant="contained" onClick={handleOpen}>Search Friend</Button> */}
     <Modal
      open={open}
      onClose={handleClose}
