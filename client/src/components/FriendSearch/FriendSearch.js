@@ -60,7 +60,7 @@ function FriendSearchForm({
 
  return (
    <div style={{ margin: '2vw' }}>
-     <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center'}}>
+     <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', color: 'black', opacity: '50%' }}>
        <h1>{currentUserState.username}: Add a friend</h1>
      </Paper>
      <br />
@@ -68,7 +68,7 @@ function FriendSearchForm({
        <Button variant="contained" style={{ backgroundColor: '#78797B', color: 'white', marginBottom: '2%' }} onClick={handleOpen}>Search Friend</Button>
      </div>
      <hr />
-     <Grid container spacing={2} style={{ marginTop: '2%'}}>
+     <Grid container spacing={2} style={{ marginTop: '2%', opacity: '70%', color: 'black'}}>
        <Grid item xs={6} md={6}>
          <Paper elevation={8} style={{display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center'}}>
            Friends
@@ -81,12 +81,12 @@ function FriendSearchForm({
        </Grid>
      </Grid>
 
-     <Grid container spacing={2} style={{marginTop: '2%', justifyContent: 'center'}}>
+     <Grid container spacing={2} style={{marginTop: '2%', justifyContent: 'center', opacity: '70%', color: 'black'}}>
        <Grid item xs={6} md={6}>
          <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center' }}>
            <List>
              {friends.map(friend => {
-               return <ListItem><ListItemText style={{ color: 'black' }} />Username: {friend.username} / Name: {friend.name}</ListItem>
+               return <ListItem><ListItemText style={{ color: 'black' }} />Username: {friend.username} | Name: {friend.name}</ListItem>
              })}
            </List>
          </Paper>
@@ -95,7 +95,7 @@ function FriendSearchForm({
          <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center' }}>
            <List>
              {friendRequestState.map(friendRequest => {
-               return <ListItem><ListItemText style={{ color: 'black' }} />Username: {friendRequest.username} / Name: {friendRequest.name}</ListItem>
+               return <ListItem><ListItemText style={{ color: 'black' }} />Username: {friendRequest.username} | Name: {friendRequest.name}</ListItem>
              })}
            </List>
          </Paper>
