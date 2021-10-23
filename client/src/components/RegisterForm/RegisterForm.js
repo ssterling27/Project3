@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import UserAPI from '../../utils/UserAPI'
 
 import axios from 'axios'
+import SynergizeLogo from '../../images/Synergize-Logo-10.png'
 
 function RegisterFooter(props) {
   return (
@@ -84,7 +85,9 @@ export default function RegisterForm() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <img src={SynergizeLogo} alt={'Synergize'} style={{ width: '20vw' }} />
+          <br />
+          <Avatar sx={{ m: 1, bgcolor: '#FFE561' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -105,6 +108,7 @@ export default function RegisterForm() {
                   autoFocus
                   value={userState.name}
                   onChange={handleInputChange}
+                  variant="filled"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -118,6 +122,7 @@ export default function RegisterForm() {
                   name="username"
                   value={userState.username}
                   onChange={handleInputChange}
+                  variant="filled"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -133,6 +138,7 @@ export default function RegisterForm() {
                   autoComplete="new-password"
                   value={userState.password}
                   onChange={handleInputChange}
+                  variant="filled"
                 />
               </Grid>
             </Grid>
