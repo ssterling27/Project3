@@ -159,22 +159,24 @@ function Meetup({
   return (
     <div id={'meetup'} style={{ height: '100vh', width: '91vw', position: 'relative', float: 'right'}}>
       <div style={{ position: 'relative', zIndex: 2 }}>
-        <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw' }}>
+        <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw', color: 'black', opacity: '50%' }}>
           <h1>Schedule a meetup</h1>
         </Paper>
-      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}>
-        <FriendDropdown
-          selectedFriendState={selectedFriendState}
-          setSelectedFriendState={setSelectedFriendState}
-          friends={friends} />
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DatePicker
-          renderInput={(props) => <TextField variant="outlined" {...props} />}
-          label="Pick a Day"
-          value={selectedDay}
-          onChange={(selectedDay) => { setSelectedDay(selectedDay) }} />
-          </LocalizationProvider>
-      </div>
+        <Paper elevation={5} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw', color: 'black', opacity: '70%', marginRight: '20%', marginLeft: '20%' }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}>
+            <FriendDropdown
+              selectedFriendState={selectedFriendState}
+              setSelectedFriendState={setSelectedFriendState}
+              friends={friends} />
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+              renderInput={(props) => <TextField variant="outlined" {...props} />}
+              label="Pick a Day"
+              value={selectedDay}
+              onChange={(selectedDay) => { setSelectedDay(selectedDay) }} />
+              </LocalizationProvider>
+          </div>       
+        </Paper>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Button variant="contained" style={{ marginTop: '20px', backgroundColor: '#78797B', color: 'white'}} onClick={findEvents}>Find Available Times</Button>
       </div>
