@@ -115,11 +115,11 @@ const boxStyle = {
   return (
     <div id='calendar' style={{ height: '100vh' }}>
       <div style={{position: 'relative', float: 'right', zIndex: 2, width: '100%'}}>
-      <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw' }}>
+      <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw', color: 'black', opacity: '50%' }}>
         <h1>Calendar</h1>
       </Paper>
     <div style={{display: 'flex', justifyContent: 'center'}}>
-        <Button style={{ marginRight: '20px' }} variant="contained" style={{ backgroundColor: 'white', color: 'black', marginRight: '1%' }} onClick={() => document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })}>Schedule Meetup</Button>
+        <Button variant="contained" style={{ backgroundColor: 'white', color: 'black', marginRight: '1%' }} onClick={() => document.getElementById("meetup").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })}>Schedule Meetup</Button>
         <Button variant="contained" style={{ backgroundColor: '#78797B', color: 'white', marginLeft: '1%' }} onClick={handleOpen}>Add Event</Button>
       <Modal
         open={open}

@@ -24,7 +24,7 @@ function FriendDropdown ({
   }, [selectThisFriend])
 
   return (
-    <Box sx={{ width: '30vw', marginRight: '50px' }}>
+    <Box sx={{ width: '30vw', marginRight: '50px', marginBottom: '3%' }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Select a Friend</InputLabel>
         <Select

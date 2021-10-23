@@ -16,6 +16,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import UserAPI from '../../utils/UserAPI'
+import SynergizeLogo from '../../images/Synergize-Logo-10.png'
 
 function LogInFooter(props) {
  return (
@@ -68,7 +69,9 @@ export default function LogInForm() {
       alignItems: 'center',
      }}
     >
-     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+     <img src={SynergizeLogo} alt={'Synergize'} style={{ width: '20vw' }} />
+     <br />
+         <Avatar sx={{ m: 1, bgcolor: '#F86F0F' }}>
       <LockOutlinedIcon />
      </Avatar>
      <Typography component="h1" variant="h5">
@@ -87,6 +90,7 @@ export default function LogInForm() {
          name="username"
          value={userState.username}
          onChange={handleInputChange}
+         variant="filled"
         />
        </Grid>
        <Grid item xs={12}>
@@ -102,6 +106,7 @@ export default function LogInForm() {
          autoComplete="new-password"
          value={userState.password}
          onChange={handleInputChange}
+         variant="filled"
         />
        </Grid>
       </Grid>
