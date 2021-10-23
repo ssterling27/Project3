@@ -157,8 +157,8 @@ function Meetup({
 // console.log(openTimes)
   
   return (
-    <div id={'meetup'} style={{ height: '100vh', width: '91vw', position: 'relative', float: 'right'}}>
-      <div style={{ position: 'relative', zIndex: 2 }}>
+    <div id={'meetup'} style={{ height: '100vh'}}>
+      <div style={{ position: 'relative', zIndex: 2, float: 'right', width: '100%' }}>
         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw', color: 'black', opacity: '50%' }}>
           <h1>Schedule a meetup</h1>
         </Paper>

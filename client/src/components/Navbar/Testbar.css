@@ -1,0 +1,11 @@
+.css-1v5u2yv {
+  padding: 0 !important;
+  position: relative;
+  min-width: 100px;
+}
+
+@media screen and (min-width: 600px) {
+  .css-1t29gy6-MuiToolbar-root {
+    margin-bottom: -64px;
+  }
+}
