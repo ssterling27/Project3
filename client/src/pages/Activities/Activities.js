@@ -3,13 +3,13 @@ import { Button, Paper, Box, Typography, Grid, Card, CardActionArea, CardActions
 import './Activities.css'
 function Activities() {
   return (
-    <div id={'activities'} style={{ height: '100vh', width: '92vw', position: 'relative', float: 'right' }}>
-    <div style={{ position: 'relative', zIndex: 2 }}>
+    <div id={'activities'} style={{ height: '100vh' }}>
+      <div style={{ zIndex: 2, position: 'relative', float: 'right', width: '100%' }}>
       <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw' }}>
         <h1>Activities</h1>
       </Paper>
       <Grid item xs={12} sm={8} md={6}>
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, marginLeft: '5vw' }}>
           <CardMedia
             component="img"
             height=""

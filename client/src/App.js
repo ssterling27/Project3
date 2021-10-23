@@ -6,18 +6,13 @@ import {
 } from 'react-router-dom'
 import Login from './pages/Auth/Login.js'
 import Register from './pages/Auth/Register.js'
-import Calendar from './pages/Calendar/Calendar.js'
-import Parallax from './pages/Parallax/Parallax.js'
-import Home from './pages/Home/Home.js'
-import AddFriend from './pages/AddFriend/AddFriend.js'
-import Meetup from './pages/Meetup/Meetup.js'
-import Activities from './pages/Activities/Activities.js'
 import Navbar from './components/Navbar/Navbar.js'
 import { useState, useEffect } from 'react'
 import UserAPI from './utils/UserAPI'
 import { format, parse, getDay, startOfToday, addHours } from 'date-fns'
 import { dateFnsLocalizer } from 'react-big-calendar'
 import { LocalizationProvider } from '@mui/lab'
+import { Grid } from '@mui/material'
 import startOfWeek from 'date-fns/startOfWeek';
 const locales = {
   'en-US': require('date-fns/locale/en-US')
@@ -122,8 +117,7 @@ function App() {
             <Register />
           </Route>
           <Route exact path={'/' | '/calendar' | '/addfriend' | '/meetup' | '/activities'} >
-            <Navbar
-              selectedMeetupRequest={selectedMeetupRequest}
+            <Navbar selectedMeetupRequest={selectedMeetupRequest}
               setSelectedMeetupRequest={setSelectedMeetupRequest}
               friends={friends}
               setFriends={setFriends}
@@ -139,36 +133,15 @@ function App() {
               setNewEvent={setNewEvent}
               allEvents={allEvents}
               setAllEvents={setAllEvents}
-            />
-            <Parallax />
-            <Home />
-            <Route>
-              <Calendar
-                allEvents={allEvents}
-                setAllEvents={setAllEvents}
-                unavailableHours={unavailableHours}
-                newEvent={newEvent}
-                setNewEvent={setNewEvent} />
-            </Route>
-            <AddFriend
-              friendRequestState={friendRequestState}
-              setFriendRequestState={setFriendRequestState}
-              friends={friends}
-              sendFriendRequest={sendFriendRequest}
+              unavailableHours={unavailableHours}
+              selectedDay={selectedDay}
+              setSelectedDay={setSelectedDay}
               friendRequestSent={friendRequestSent}
               setFriendRequestSent={setFriendRequestSent}
               openFriendRequestSent={openFriendRequestSent}
               closeFriendRequestSent={closeFriendRequestSent}
-            />
-            <Meetup
-              selectedFriendState={selectedFriendState}
-              setSelectedFriendState={setSelectedFriendState}
-              friends={friends}
-              allEvents={allEvents}
-              setAllEvents={setAllEvents}
-              selectedDay={selectedDay}
-              setSelectedDay={setSelectedDay} />
-            <Activities />
+              sendFriendRequest={sendFriendRequest}
+              />
           </Route>
         </Switch>
       </div>

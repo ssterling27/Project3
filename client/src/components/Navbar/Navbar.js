@@ -1,15 +1,28 @@
-import * as React from 'react'
-import { Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem, ListItemIcon, ListItemText } from '@mui/material'
-import { MoveToInbox as InboxIcon, Mail as MailIcon } from '@mui/icons-material'
+import React from 'react'
+import { Box, Drawer, CssBaseline, AppBar, Toolbar, List, Typography, Divider, ListItem, ListItemIcon, ListItemText, Hidden, IconButton } from '@mui/material'
+import PropTypes from 'prop-types'
+import { Mail as MailIcon, MenuRounded as MenuIcon } from '@mui/icons-material'
 import { useState, useEffect } from 'react'
 import FriendRequestModal from '../FriendRequestModal/FriendRequestModal.js'
 import FriendInfoModal from '../FriendInfoModal/FriendInfoModal.js'
 import MeetupRequestModal from '../MeetupRequestModal/MeetupRequestModal.js'
-
+import { withStyles } from '@mui/styles'
+import Grid from '@mui/material/Grid/Grid'
+import SoloLogo from '../../images/logoOnly.png'
 import LogoutIcon from '@mui/icons-material/Logout';
-import HomeIcon from '@mui/icons-material/Home';
+import HomeIcon from '@mui/icons-material/Home'
+import Calendar from '../../pages/Calendar/Calendar.js'
+import Parallax from '../../pages/Parallax/Parallax.js'
+import Home from '../../pages/Home/Home.js'
+import AddFriend from '../../pages/AddFriend/AddFriend.js'
+import Meetup from '../../pages/Meetup/Meetup.js'
+import Activities from '../../pages/Activities/Activities.js'
+import './Testbar.css'
+import logoLetters from '../../images/logoletters.png'
 
-function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setFriends, friendRequestState, setFriendRequestState, meetupRequestState, setMeetupRequestState, selectedFriendState, setSelectedFriendState, allMeetupRequests, setAllMeetupRequests, newEvent, setNewEvent, allEvents, setAllEvents }) {
+const drawerWidth = 240;
+
+function Navbar({window: props, selectedMeetupRequest, setSelectedMeetupRequest, friends, setFriends, friendRequestState, setFriendRequestState, meetupRequestState, setMeetupRequestState, selectedFriendState, setSelectedFriendState, allMeetupRequests, setAllMeetupRequests, newEvent, setNewEvent, allEvents, setAllEvents, unavailableHours, selectedDay, setSelectedDay, friendRequestSent, setFriendRequestSent, openFriendRequestSent, closeFriendRequestSent, sendFriendRequest}) {
   function goHome(event) {
     document.getElementById("home").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" })
   }
@@ -29,14 +42,7 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
     localStorage.removeItem('token')
     window.location = '/signIn'
   }
- 
 
-  // function meetupFriend(event) {
-  //   setMeetupFriendState({ username: event.target.childNodes[0].innerText || event.target.innerText, id: event.target.childNodes[0].id || event.target.id })
-  //   // console.log(meetupFriendState)
-  //   window.location.hash = 'meetup'
-  // }
-  
   const [friendOpen, setFriendOpen] = useState(false)
   const openFriendRequest = () => setFriendOpen(true)
   const closeFriendRequest = () => setFriendOpen(false)
@@ -62,7 +68,7 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
     username: '',
     id: ''
   })
-  
+
   const selectFriend = (username, id, name) => {
     setSelectedFriendState({
       name: name,
@@ -83,39 +89,44 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
     setSelectedMeetupRequest(meetupRequest)
     openMeetupRequest()
   }
-  return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <Drawer
-        sx={{
-          width: '8vw',
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: '8vw',
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <Toolbar style={{ display: 'flex', justifyContent: 'center' }}>
-          <Typography style={{ fontSize: '1.5vw' }}>
-            Synergize
-          </Typography>
-        </Toolbar>
-        <Divider />
-        <List>
+  const barStyle = {
+    container: isRowBased => ({
+      display: isRowBased ? 'none' : '',
+      marginBottom: isRowBased ? '-64px' : '0',
+      backgroundColor: 'white'
+    })
+  }
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const mediaMatch = window.matchMedia('(min-width: 600px')
+  const [matches, setMatches] = useState(mediaMatch.matches)
+  useEffect(() => {
+    const handler = e => setMatches(e.matches);
+    mediaMatch.addListener(handler);
+    return () => mediaMatch.removeListener(handler);
+  }, [mediaMatch]);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+  
+  const drawer = (
+    <div>
+      <Typography sx={{display: 'flex', justifyContent: 'center'}}>
+          <img src={SoloLogo} style={{width: '60%', padding: '10px'}} alt={'Synergize Logo'}/>
+      </Typography>
+      <Divider />
+      <List>
           <ListItem button key='Home' onClick={goHome}>
             {/* <ListItemText primary='Home' /> */}
-            <li primary='Home' style={{ fontSize: '1.2vw' }}>{<HomeIcon />} </li>
+            <li primary='Home'>{<HomeIcon />} </li>
           </ListItem>
           <ListItem button key='Planner' onClick={goCalendar}>
-            <li primary="Planner" style={{ fontSize: '1.2vw' }}>Planner</li>
+            <li primary="Planner">Planner</li>
           </ListItem>
           <ListItem key='Friends'>
-            <li primary="Friends" style={{ fontSize: '1.2vw' }}>Friends</li>
+            <li primary="Friends">Friends</li>
           </ListItem>
-          {friends.map(({username, _id, name}) => (<ListItem style={{ display: 'flex', justifyContent: 'flex-end' }} button onClick={() => selectFriend(username, _id, name)}><li primary={username} style={{ fontSize: '1vw' }}>{username}</li></ListItem>))}
+          {friends.map(({username, _id, name}) => (<ListItem style={{ display: 'flex', justifyContent: 'flex-end' }} button onClick={() => selectFriend(username, _id, name)}><li primary={username}>{username}</li></ListItem>))}
           <FriendInfoModal
             friendInfoOpen={friendInfoOpen}
             setFriendInfoOpen={setFriendInfoOpen}
@@ -128,19 +139,19 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
             setFriends={setFriends}
             goMeetupPage={goMeetupPage}/>
           <ListItem button key='Add Friend' onClick={goAddFriend}>
-            <li primary="Add Friend" style={{ fontSize: '1.2vw' }}>Add Friend</li>
+            <li primary="Add Friend">Add Friend</li>
           </ListItem>
           <ListItem button key='Schedule Meetup' onClick={goMeetupPage}>
-            <li primary="Schedule Meetup" style={{ fontSize: '1.2vw' }}>Schedule Meetup</li>
+            <li primary="Schedule Meetup">Schedule Meetup</li>
           </ListItem>
           <ListItem button key='Activities' onClick={goActivities}>
-            <li primary="Activities" style={{ fontSize: '1.2vw' }}>Activities</li>
+            <li primary="Activities">Activities</li>
           </ListItem>
           <ListItem key='Friend Requests'>
-            <li primary="friend requests" style={{ fontSize: '1.2vw' }}>Friend Requests</li>
+            <li primary="friend requests">Friend Requests</li>
           </ListItem>
           {friendRequestState.map(({ username, id, name }) => (
-            <ListItem style={{ display: 'flex', justifyContent: 'flex-end' }} button onClick={() => openRequestModal(username, id, name)}><li style={{fontSize:'1vw'}}>{username}</li></ListItem>
+            <ListItem style={{ display: 'flex', justifyContent: 'flex-end' }} button onClick={() => openRequestModal(username, id, name)}><li>{username}</li></ListItem>
           ))}
           <FriendRequestModal
             friendOpen={friendOpen}
@@ -155,9 +166,9 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
             friends={friends}
             setFriends={setFriends} />
           <ListItem key='Meetup Requests'>
-            <li primary="Meetup requests" style={{ fontSize: '1.2vw' }}>Meetup Requests</li>
+            <li primary="Meetup requests">Meetup Requests</li>
           </ListItem>
-          {allMeetupRequests.map(meetupRequest => (<ListItem style={{ display: 'flex', justifyContent: 'flex-end' }} button onClick={() => viewMeetupRequest(meetupRequest)}><li style={{ fontSize: '1vw' }}>{meetupRequest.sentBy.username}</li></ListItem>))}
+          {allMeetupRequests.map(meetupRequest => (<ListItem style={{ display: 'flex', justifyContent: 'flex-end' }} button onClick={() => viewMeetupRequest(meetupRequest)}><li>{meetupRequest.sentBy.username}</li></ListItem>))}
           <MeetupRequestModal
             meetupRequestOpen={meetupRequestOpen}
             setMeetupRequestOpen={setMeetupRequestOpen}
@@ -172,24 +183,116 @@ function Navbar({ selectedMeetupRequest, setSelectedMeetupRequest, friends, setF
             setNewEvent={setNewEvent}
             allEvents={allEvents}
             setAllEvents={setAllEvents} />
+            </List>
+      <Divider />
+      <List>
+        <ListItem button key='logOut' onClick={logOut}>
+          <li primary='LogOut'>{<LogoutIcon />} </li>
+        </ListItem>
+      </List>
+    </div>
+  );
 
-          {/* {['Home', 'Planner', 'Friends', 'Add Friend', 'Activities'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
-          <hr />
-          <ListItem button key='logOut' onClick={logOut}>
-            {/* <ListItemText primary='Home' /> */}
-            <li primary='LogOut' style={{ fontSize: '1.2vw' }}>{<LogoutIcon />} </li>
-          </ListItem>
-        </List>
-      </Drawer>
+  const container = props !== undefined ? () => window().document.body : undefined;
+
+  return (
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        sx={{
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          ml: { sm: `${drawerWidth}px` },
+        }}
+      >
+        <Toolbar sx={barStyle.container(matches)}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon sx={{ color: 'hsla(217, 100%, 50%, 1)'}}/>
+          </IconButton>
+          <img src={logoLetters} style={{width: '25%'}} alt={'Synergize'}></img>
+        </Toolbar>
+      </AppBar>
+      <Box
+        component="nav"
+        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        aria-label="mailbox folders"
+      >
+        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: 'block', sm: 'none' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+        >
+          {drawer}
+        </Drawer>
+        <Drawer
+          variant="permanent"
+          sx={{
+            display: { xs: 'none', sm: 'block' },
+            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          }}
+          open
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+      >
+        <Toolbar />
+        <Parallax />
+        <Home />
+        <Calendar
+          allEvents={allEvents}
+          setAllEvents={setAllEvents}
+          unavailableHours={unavailableHours}
+          newEvent={newEvent}
+          setNewEvent={setNewEvent} />
+        <AddFriend
+          friendRequestState={friendRequestState}
+          setFriendRequestState={setFriendRequestState}
+          friends={friends}
+          sendFriendRequest={sendFriendRequest}
+          friendRequestSent={friendRequestSent}
+          setFriendRequestSent={setFriendRequestSent}
+          openFriendRequestSent={openFriendRequestSent}
+          closeFriendRequestSent={closeFriendRequestSent}
+        />
+        <Meetup
+          selectedFriendState={selectedFriendState}
+          setSelectedFriendState={setSelectedFriendState}
+          friends={friends}
+          allEvents={allEvents}
+          setAllEvents={setAllEvents}
+          selectedDay={selectedDay}
+          setSelectedDay={setSelectedDay} />
+        <Activities />
+      </Box>
     </Box>
-  )
+  );
 }
 
-export default Navbar
+Navbar.propTypes = {
+  /**
+   * Injected by the documentation to work in an iframe.
+   * You won't need it on your project.
+   */
+  window: PropTypes.func,
+};
+
+export default Navbar;

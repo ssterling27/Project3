@@ -113,8 +113,8 @@ const boxStyle = {
 
 
   return (
-    <div id='calendar' style={{ width: '92vw', position: 'relative', float: 'right', height: '100vh' }}>
-      <div style={{position: 'relative', zIndex: 2}}>
+    <div id='calendar' style={{ height: '100vh' }}>
+      <div style={{position: 'relative', float: 'right', zIndex: 2, width: '100%'}}>
       <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw' }}>
         <h1>Calendar</h1>
       </Paper>

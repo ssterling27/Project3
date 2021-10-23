@@ -5,6 +5,7 @@ import SynergizeLogo from '../../images/Synergize-Logo-10.png'
 import { styled } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
+
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
@@ -23,9 +24,9 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 function Home() {
   return (
-    <div id={'home'} style={{ height: '100vh', width: '92vw', position: 'relative', float: 'right'}}>
-      <div style={{ marginTop: '25vh', display: 'flex', justifyContent: 'center', width: '92vw', position: 'relative', float: 'right', zIndex: '2'}}>
-        <img src={SynergizeLogo} alt={'Synergize'} style={{width: '50vw'}} />
+    <div id={'home'} style={{ height: '100vh'}}>
+      <div style={{ marginTop: '25vh', display: 'flex', justifyContent: 'center', width: '100%', position: 'relative', float: 'right', zIndex: '2'}}>
+        <img src={SynergizeLogo} alt={'Synergize'} style={{width: '50vw', minWidth: '400px'}} />
       {/* <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <StyledToolbar>
