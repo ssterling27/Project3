@@ -3,7 +3,7 @@ import './Login.css'
 
 const Login = () => {
  return (
-  <div id={'loginPage'} style={{ height: '100vh', width: '100vw', position: 'relative', float: 'right' }}>
+  <div id={'login'} style={{ height: '100vh', width: '100vw', position: 'relative', float: 'right' }}>
    <LogInForm/>
   </div>
  )
