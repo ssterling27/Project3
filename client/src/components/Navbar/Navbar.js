@@ -94,8 +94,8 @@ function Navbar({window: props, selectedMeetupRequest, setSelectedMeetupRequest,
     container: isRowBased => ({
       display: isRowBased ? 'none' : '',
       marginBottom: isRowBased ? '-60px' : '0px',
-      backgroundColor: 'white',
       minHeight: '0px',
+      backgroundColor: 'rgb(192, 188, 243)',
       height: '40px'
     })
   }

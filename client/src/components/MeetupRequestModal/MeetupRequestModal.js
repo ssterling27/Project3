@@ -70,9 +70,11 @@ function MeetupRequestModal({
       day: selectedMeetupRequest.day,
       hours: selectedMeetupRequest.hours
     }
-    setAllEvents([...allEvents, newMeetup])
     MeetupAPI.acceptMeetupRequest(selectedMeetupRequest.sentBy.id, selectedMeetupRequest.meetupid, newMeetup)
-    .then(({data}) => {
+    .then(({data: e}) => {
+      e.start = new Date(e.start)
+      e.end = new Date(e.end)
+      setAllEvents([...allEvents, e])
       // setFriendRequestState(friendRequestState.filter(friendrequest => friendrequest.id !== selectedRequestState.id))
       setAllMeetupRequests(allMeetupRequests.filter(meetupRequest => meetupRequest.meetupid !== selectedMeetupRequest.meetupid))
       closeMeetupRequest()
