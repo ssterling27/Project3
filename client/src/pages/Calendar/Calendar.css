@@ -7,5 +7,146 @@
 } */
 
 #calendar {
-  background: linear-gradient(0deg, hsla(50, 100%, 69%, 1) 0%, hsla(185, 100%, 50%, 1) 100%)
+  background: linear-gradient(0deg, hsla(50, 100%, 69%, 1) 0%, hsla(185, 100%, 50%, 1) 100%);
+  height: 100vh
 }
+
+@media screen and (max-width: 600px) {
+  #calendar {
+    height: calc(100vh - 40px);
+  }
+}
+
+.rbc-day-bg {
+  background-color: rgba(0, 110, 255, 0.37);
+}
+
+.rbc-date-cell {
+  color: rgb(9, 0, 138);
+}
+
+.rbc-off-range-bg {
+  background-color: rgba(0, 26, 255, 0.39);
+}
+
+.rbc-off-range {
+  color: rgb(210, 253, 255);
+}
+
+.rbc-header {
+  background-color: hsla(217, 100%, 50%, 0.8);
+  color: rgb(227, 254, 255);
+}
+
+.rbc-toolbar {
+  flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 900px) {
+  .rbc-toolbar {
+    display: grid;
+    justify-items: center;
+  }
+}
+
+.rbc-time-column {
+  /* background-color: rgba(8, 3, 255, 0.185) */
+  background: linear-gradient(180deg, hsla(251, 100%, 50%, .2) 0%, hsla(54, 100%, 54%, .3) 100%);
+}
+
+.rbc-today {
+  /* background-color: rgba(61, 255, 245, 0.411); */
+  background: linear-gradient(180deg, rgba(61, 255, 245, 0.6) 70%, hsla(54, 100%, 54%, .3) 100%);
+}
+
+.rbc-toolbar .rbc-toolbar-label {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  color: black;
+  box-sizing: inherit;
+  font-size: 2em;
+  font-weight: 410;
+}
+
+.rbc-toolbar button {
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  text-decoration: none;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  letter-spacing: 0.02857em;
+  text-transform: uppercase;
+  min-width: 60px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  color: #fff;
+  background-color: rgb(0, 80, 228);
+  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+}
+
+.rbc-toolbar button.rbc-active {
+  color: black;
+}
+
+.rbc-event {
+  background-color: rgb(0, 137, 228);
+}
+
+.rbc-event.rbc-selected {
+  background-color: rgb(0, 63, 180);
+  border: 2px solid rgb(0, 137, 228)
+}
+
+.rbc-header.rbc-today {
+  color: rgb(9, 0, 138);
+}
+
+.rbc-label {
+  color: rgb(9, 0, 138);
+}
+
+.rbc-agenda-table tbody {
+  background: linear-gradient(180deg, rgba(61, 226, 255, 0.9) 70%, hsla(54, 100%, 54%, .3) 100%);
+  color: rgb(0, 83, 138);
+}
+
+.schedulebutton:hover {
+  background-color: rgb(255, 63, 59) !important;
+}
+
+.schedulebutton {
+  background-color: rgb(230, 4, 0) !important;
+}
+
+.addbutton {
+  background-color: rgb(0, 137, 228) !important;
+}
+
+.addbutton:hover {
+  background-color: rgb(0, 194, 228) !important;
+}
+
+/* input:focus {
+  border: 2px solid rgb(69, 227, 255)
+} */

@@ -57,7 +57,8 @@ function Navbar({window: props, selectedMeetupRequest, setSelectedMeetupRequest,
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 600,
+    width: '90vw',
+    maxWidth: 600,
     bgcolor: 'white',
     border: '2px solid grey',
     p: 4
@@ -92,8 +93,10 @@ function Navbar({window: props, selectedMeetupRequest, setSelectedMeetupRequest,
   const barStyle = {
     container: isRowBased => ({
       display: isRowBased ? 'none' : '',
-      marginBottom: isRowBased ? '-64px' : '0',
-      backgroundColor: 'white'
+      marginBottom: isRowBased ? '-60px' : '0px',
+      backgroundColor: 'white',
+      minHeight: '0px',
+      height: '40px'
     })
   }
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -120,8 +123,8 @@ function Navbar({window: props, selectedMeetupRequest, setSelectedMeetupRequest,
             {/* <ListItemText primary='Home' /> */}
             <li primary='Home'>{<HomeIcon />} </li>
           </ListItem>
-          <ListItem button key='Planner' onClick={goCalendar}>
-            <li primary="Planner">Planner</li>
+          <ListItem button key='Calendar' onClick={goCalendar}>
+            <li primary="Calendar">Calendar</li>
           </ListItem>
           <ListItem key='Friends'>
             <li primary="Friends">Friends</li>
@@ -215,7 +218,9 @@ function Navbar({window: props, selectedMeetupRequest, setSelectedMeetupRequest,
           >
             <MenuIcon sx={{ color: 'hsla(217, 100%, 50%, 1)'}}/>
           </IconButton>
-          <img src={logoLetters} style={{width: '25%'}} alt={'Synergize'}></img>
+          <div style={{width: '30%', marginLeft: '25%'}}>
+          <img src={logoLetters} style={{ width: '-webkit-fill-available', marginTop: '17px'}} alt={'Synergize'}></img>
+          </div>
         </Toolbar>
       </AppBar>
       <Box
@@ -254,7 +259,7 @@ function Navbar({window: props, selectedMeetupRequest, setSelectedMeetupRequest,
         component="main"
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
-        <Toolbar />
+        <Toolbar sx={{minHeight: '0'}} />
         <Parallax />
         <Home />
         <Calendar
