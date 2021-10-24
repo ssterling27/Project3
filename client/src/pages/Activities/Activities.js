@@ -19,23 +19,23 @@ function Activities() {
 
    <div id={'activities'} style={{ height: '100vh' }}>
       <div style={{ zIndex: 2, position: 'relative', float: 'right', width: '100%' }}>
-        <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw', color: 'black', opacity: '50%' }}>
+        <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2%', marginTop: '1%', marginLeft: 'auto', marginRight: 'auto', color: 'black', backgroundColor: 'rgba(255, 255, 255, 0.7)', width: '50%', height: '5vh' }}>
         <h1>Activities</h1>
         </Paper>
 
 
         <Box component="div">
-          <Grid container spacing={2}>
+          <Grid container style={{justifyContent: 'center', height: '90vh', alignContent: 'space-evenly'}}>
             <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345, margin: '5rem auto', opacity: '95%' }}>
+              <Card sx={{ maxWidth: 345, margin: 'auto' }}>
                 <CardMedia
                   component="img"
-                  height="170"
+                  height='60'
                   image={BookBuster}
                   alt="BookBuster"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent style={{height: '7vh'}}>
+                  <Typography variant="h5" component="div" style={{marginTop: '-18px', fontSize: '1.2em'}}>
                     BookBuster
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -43,21 +43,21 @@ function Activities() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='https://polyca123.github.io/Bookbuster/' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' style={{ width: '50%', fontSize: '1vh' }} href='https://polyca123.github.io/Bookbuster/' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>
 
             <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345, margin: '5rem auto' }}>
+              <Card sx={{ maxWidth: 345, margin: 'auto' }}>
                 <CardMedia
                   component="img"
-                  height="170"
+                  height='60'
                   image={MePlant}
                   alt="MePlant"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent style={{ height: '7vh' }}>
+                  <Typography variant="h5" component="div" style={{ marginTop: '-18px', fontSize: '1.2em' }}>
                     MePlant
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -65,21 +65,21 @@ function Activities() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='https://meplant-app.herokuapp.com/' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' style={{ width: '50%', fontSize: '1vh' }} href='https://meplant-app.herokuapp.com/' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>
 
             <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345, margin: '5rem auto' }}>
+              <Card sx={{ maxWidth: 345, margin: 'auto' }}>
                 <CardMedia
                   component="img"
-                  height="170"
+                  height="60"
                   image={Moodify}
                   alt="Moodify"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent style={{ height: '7vh' }}>
+                  <Typography variant="h5" component="div" style={{ marginTop: '-18px', fontSize: '1.2em' }}>
                     Moodify
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
@@ -87,117 +87,117 @@ function Activities() {
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='https://moodify-27.herokuapp.com/' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' style={{ width: '50%', fontSize: '1vh' }} href='https://moodify-27.herokuapp.com/' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>
 
             <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345, margin: '5rem auto', opacity: '95%' }}>
+              <Card sx={{ maxWidth: 345, margin: 'auto' }}>
                 <CardMedia
                   component="img"
-                  height="170"
+                  height="60"
                   image={BrewKeeper}
                   alt="BrewKeeper"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent style={{ height: '5vh' }}>
+                  <Typography variant="h5" component="div" style={{ marginTop: '-18px', fontSize: '1.2em' }}>
                     BrewKeeper
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Find and record your favorite beers!
+                    Find your favorite beers!
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='https://floating-brook-56219.herokuapp.com/verifyage.html' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' style={{ width: '50%', fontSize: '1vh' }} href='https://floating-brook-56219.herokuapp.com/verifyage.html' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>
 
             <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345, margin: '5rem auto' }}>
+              <Card sx={{ maxWidth: 345, margin: 'auto' }}>
                 <CardMedia
                   component="img"
-                  height="170"
+                  height="60"
                   image={EnRoute}
                   alt="En-Route"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent style={{ height: '5vh' }}>
+                  <Typography variant="h5" component="div" style={{ marginTop: '-18px', fontSize: '1.2em' }}>
                     En-Route
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Plan your next road trip and activities!
+                    Plan your next road trip!
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='https://ssterling27.github.io/EN-Route/index.html' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' style={{ width: '50%', fontSize: '1vh' }} href='https://ssterling27.github.io/EN-Route/index.html' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>
 
             <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345, margin: '5rem auto' }}>
+              <Card sx={{ maxWidth: 345, margin: 'auto' }}>
                 <CardMedia
                   component="img"
-                  height="170"
+                  height="60"
                   image={foodForYou}
                   alt="Food For You"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent style={{ height: '5vh' }}>
+                  <Typography variant="h5" component="div" style={{ marginTop: '-18px', fontSize: '1.2em' }}>
                     Food For You
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Find recipes based off your ingredients!
+                    Find recipes!
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='https://gresendi.github.io/FoodForYou/index.html' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' style={{ width: '50%', fontSize: '1vh' }} href='https://gresendi.github.io/FoodForYou/index.html' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>
 
             <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345, margin: '5rem auto', opacity: '95%' }}>
+              <Card sx={{ maxWidth: 345, margin: 'auto'}}>
                 <CardMedia
                   component="img"
-                  height="170"
+                  height="60"
                   image={Sessions}
                   alt="Session"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
-                    Sessions
+                <CardContent style={{ height: '5vh' }}>
+                  <Typography variant="h5" component="div" style={{ marginTop: '-18px', fontSize: '1.2em' }}>
+                    Session
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
                     Find waves to surf nearby!
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='https://sequint.github.io/session/sessions.html' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' style={{ width: '50%', fontSize: '1vh' }} href='https://sequint.github.io/session/sessions.html' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>
 
-            <Grid item xs={4}>
-              <Card sx={{ maxWidth: 345, margin: '5rem auto' }}>
+            <Grid item xs={4} >
+              <Card sx={{ maxWidth: 345, margin: 'auto' }}>
                 <CardMedia
                   component="img"
-                  height="170"
+                  height="60"
                   image={Pub}
-                  alt="En-Route"
+                  alt="Pub"
                 />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="div">
+                <CardContent style={{ height: '5vh' }}>
+                  <Typography variant="h5" component="div" style={{ marginTop: '-18px', fontSize: '1.2em' }}>
                     PUB
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Create, track and share your projects!
+                    Create and track your projects!
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='https://pure-brook-86019.herokuapp.com/' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' style={{width: '50%', fontSize: '1vh'}} href='https://pure-brook-86019.herokuapp.com/' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>

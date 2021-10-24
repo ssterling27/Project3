@@ -62,30 +62,30 @@ function FriendSearchForm({
 
  return (
    <div style={{ margin: '2vw' }}>
-     <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', color: 'black', opacity: '50%' }}>
+     <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2%', marginTop: '1%', marginLeft: 'auto', marginRight: 'auto', color: 'black', backgroundColor: 'rgba(255, 255, 255, 0.7)', width: '80%', height: '5vh' }}>
        <h1>{currentUserState.username}: Add a friend</h1>
      </Paper>
      <br />
      <div style={{ display: 'flex', justifyContent: 'center' }}>
-       <Button className='searchFriendBtn' variant="contained" style={{ backgroundColor: '#78797B', color: 'white', marginBottom: '2%' }} onClick={handleOpen}>Search Friend</Button>
+       <Button className='searchFriendBtn' variant="contained" style={{ backgroundColor: 'rgb(210, 253, 255)', color: 'black', marginBottom: '2%' }} onClick={handleOpen}>Search Friend</Button>
      </div>
-     <hr />
-     <Grid container spacing={2} style={{ marginTop: '2%', opacity: '70%', color: 'black'}}>
+     {/* <hr /> */}
+     <Grid container spacing={2} style={{ marginTop: '2%', color: 'black'}}>
        <Grid item xs={6} md={6}>
-         <Paper elevation={8} style={{display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center', fontSize: '2rem'}}>
+         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center', fontSize: '2rem', backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
            Friends
          </Paper>
        </Grid>
        <Grid item xs={6} md={6}>
-         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center', fontSize: '2rem'}}>
+         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center', fontSize: '2rem', backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
            Friend Requests
          </Paper>
        </Grid>
      </Grid>
 
-     <Grid container spacing={2} style={{marginTop: '2%', justifyContent: 'center', opacity: '70%', color: 'black'}}>
+     <Grid container spacing={2} style={{marginTop: '2%', justifyContent: 'center', color: 'black'}}>
        <Grid item xs={6} md={6}>
-         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center' }}>
+         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
            <List>
              {friends.map(friend => {
                return <ListItem style={{ marginBottom: '3%', marginTop: '2%', fontWeight: 'bold', borderRadius: '1.5%', background: '#ede8e8', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'}}><ListItemText style={{ color: 'black' }} />Username: {friend.username} | Name: {friend.name}</ListItem>
@@ -94,7 +94,7 @@ function FriendSearchForm({
          </Paper>
        </Grid>
        <Grid item xs={6} md={6}>
-         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center' }}>
+         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', backgroundColor: 'rgba(255, 255, 255, 0.7)' }}>
            <List>
              {friendRequestState.map(friendRequest => {
                return <ListItem style={{ marginBottom: '3%', marginTop: '2%', fontWeight: 'bold', borderRadius: '1.5%', background: '#ede8e8', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)' }}><ListItemText style={{ color: 'black' }} />Username: {friendRequest.username} | Name: {friendRequest.name}</ListItem>

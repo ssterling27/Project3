@@ -159,10 +159,10 @@ function Meetup({
   return (
     <div id={'meetup'} style={{ height: '100vh'}}>
       <div style={{ position: 'relative', zIndex: 2, float: 'right', width: '100%' }}>
-        <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw', color: 'black', opacity: '50%' }}>
+        <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2%', marginTop: '1%', marginLeft: 'auto', marginRight: 'auto', color: 'black', backgroundColor: 'rgba(255, 255, 255, 0.7)', width: '80%', height: '5vh' }}>
           <h1>Schedule a meetup</h1>
         </Paper>
-        <Paper elevation={5} style={{ display: 'flex', justifyContent: 'center', marginBottom: '2%', margin: '2vw', color: 'black', opacity: '70%', marginRight: '20%', marginLeft: '20%' }}>
+        <Paper elevation={5} style={{ display: 'flex', justifyContent: 'center', margin: 'auto', width: '80%', paddingLeft: '5%', paddingRight: '5%', color: 'black', backgroundColor: 'rgba(255, 255, 255, 0.8)'}}>
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: '5%' }}>
             <FriendDropdown
               selectedFriendState={selectedFriendState}
@@ -178,7 +178,7 @@ function Meetup({
           </div>       
         </Paper>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button className='findAvailTimesBtn' variant="contained" style={{ marginTop: '20px', backgroundColor: '#78797B', color: 'white'}} onClick={findEvents}>Find Available Times</Button>
+          <Button className='findAvailTimesBtn' variant="contained" style={{ marginTop: '20px', backgroundColor: 'rgb(210, 253, 255)', color: 'black'}} onClick={findEvents}>Find Available Times</Button>
       </div>
       <div style={{ marginTop: '2%', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '70vh', marginRight: '2%', marginLeft: '2%' }}>
         <Grid container spacing={2}>
