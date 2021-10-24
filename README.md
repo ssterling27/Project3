@@ -89,12 +89,20 @@ Application is built on React and utilizes Material UI - deployed on Heroku usin
 
 <kbd>
 
-Register Page (left) | LogIn Page (right)
+Register Page
 
-![](/client/src/images/pageRegister.png) | ![](/client/src/images/pageLogin.png)
+![](/client/src/images/pageRegister.png) | 
 
-Home Page (left) | Calendar Page (right)
+LogIn Page
 
-![](/client/src/images/pageHome.png) | ![](/client/src/images/pageCalendar.png)
+![](/client/src/images/pageLogin.png)
+
+Home Page
+
+![](/client/src/images/pageHome.png) | 
+
+Calendar Page
+
+![](/client/src/images/pageCalendar.png)
 
 </kbd>
