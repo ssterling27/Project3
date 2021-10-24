@@ -5,12 +5,12 @@
 }
 
 @media screen and (min-width: 600px) {
-  .css-1t29gy6-MuiToolbar-root {
+  .MuiToolbar-root {
     margin-bottom: -64px;
   }
-  .css-1gt40eh-MuiToolbar-root {
+  /* .css-1gt40eh-MuiToolbar-root {
     margin-bottom: -64px;
-  }
+  } */
 }
 
 /* .css-argmg6-MuiToolbar-root {
@@ -21,11 +21,11 @@
   min-height: none !important;
 } */
 
-.css-d9ml5t-MuiDrawer-docked .MuiDrawer-paper {
+.MuiDrawer-paper {
   background: linear-gradient(0deg, rgb(253, 236, 153) 0%, rgb(168, 164, 231) 100%);
   /* background-color: ; */
 }
 
-.css-1r7kz78-MuiModal-root-MuiDrawer-root .MuiDrawer-paper {
-  background: linear-gradient(0deg, hsla(50, 100%, 69%, 1) 0%, rgb(124, 119, 202) 100%);
-}
+/* .css-1r7kz78-MuiModal-root-MuiDrawer-root .MuiDrawer-paper {
+  background: linear-gradient(0deg, hsla(50, 100%, 69%, 1) 0%, rgb(124, 119, 202) 100%) !important;
+} */
