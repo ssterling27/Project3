@@ -16,7 +16,7 @@ const EventAPI = {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }
   }),
-  delete: id => axios.delete(`/api/events/${id}`, {
+  delete: (id, users) => axios.post(`/api/events/delete/${id}`, users, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`
     }

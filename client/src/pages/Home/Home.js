@@ -24,9 +24,9 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 function Home() {
   return (
-    <div id={'home'} style={{ height: '100vh'}}>
-      <div style={{ marginTop: '25vh', display: 'flex', justifyContent: 'center', width: '100%', position: 'relative', float: 'right', zIndex: '2'}}>
-        <img src={SynergizeLogo} alt={'Synergize'} style={{width: '50vw', minWidth: '400px'}} />
+    <div id={'home'}>
+      <div style={{ marginTop: '10vh', display: 'flex', justifyContent: 'center', width: '100%', position: 'relative', float: 'right', zIndex: '2'}}>
+        <img src={SynergizeLogo} alt={'Synergize'} style={{width: '60vw', minWidth: '400px', maxHeight: '80vh'}} />
       {/* <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <StyledToolbar>

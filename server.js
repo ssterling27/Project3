@@ -1,6 +1,7 @@
 // bringing in all the required stuff
 require('dotenv').config()
 
+
 const express = require('express')
 const { join } = require('path')
 const passport = require('passport')
@@ -27,10 +28,22 @@ passport.use(new JwtStrategy({
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: process.env.SECRET
 }, ({ id }, cb) => User.findById(id)
-  // line below is the only one you have to change for project
-  .populate('events')
-  .populate('friends')
-  .populate('friendRequests')
+  .populate({
+    path: 'events',
+    populate: {
+      path: 'users',
+      select: {'_id': 1, 'username': 1, 'name': 1}
+    }
+  })
+  
+  .populate({
+    path: 'friends',
+    select: { '_id': 1, 'username': 1, 'name': 1}
+  })
+  .populate({
+    path: 'friendRequests',
+    select: { '_id': 1, 'username': 1, 'name': 1 }
+  })
   .populate('meetupRequests')
   .then(user => cb(null, user))
   .catch(err => cb(err))))
