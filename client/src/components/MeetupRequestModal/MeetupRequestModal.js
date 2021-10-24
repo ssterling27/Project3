@@ -1,4 +1,4 @@
-import { Button, Modal, Box, Typography, TextField, ListItem } from '@mui/material'
+import { Button, Modal, Box, Typography, TextField, ListItem, backdropClasses } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import UserAPI from '../../utils/UserAPI'
 import EventAPI from '../../utils/EventAPI'
@@ -92,21 +92,49 @@ function MeetupRequestModal({
       <Box sx={modalStyle}>
         <Typography id="modal-modal-title" variant="h4" component="h2" style={{ display: 'flex', justifyContent: 'center' }}>Meetup Request From:</Typography>
         <Typography id="modal-modal-title" variant="h6" component="h2" style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>{selectedMeetupRequest.sentBy.username}</Typography>
+        <hr />
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-            <p>{selectedMeetupRequest.title}</p>
-            <p>{selectedMeetupRequest.location}</p>
-          </div>
-          </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-            <p>{selectedMeetupRequest.description}</p>
+            <Typography>
+              Meetup Title
+            </Typography>
+            <Typography>
+              Meetup Location
+            </Typography>
           </div>
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-            <p>Starts at: {startFormat}</p>
-            <p>Ends at: {endFormat}</p>
+            <TextField disabled type='text' style={{width: '45%', borderRadius: '2%' }} value={selectedMeetupRequest.title} />
+            <TextField disabled type='text' style={{width: '45%', borderRadius: '2%'}} value={selectedMeetupRequest.location} />
+          </div>
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Typography>
+              Meetup Description
+            </Typography>
+          </div>
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <TextField disabled type='text'style={{ width: '95%' }} value={selectedMeetupRequest.description} />
+          </div>
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <Typography>
+              Meetup Starts At
+            </Typography>
+            <Typography>
+              Meetup Ends At
+            </Typography>
+          </div>
+        </Typography>
+        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <TextField disabled type='text' style={{ width: '45%' }} value={startFormat} />
+            <TextField disabled type='text' style={{ width: '45%' }} value={endFormat} />
           </div>
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
