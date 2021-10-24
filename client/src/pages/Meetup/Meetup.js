@@ -185,7 +185,7 @@ function Meetup({
         {availableTimes.map(hour => (
           <Grid item xs={6}>
             <Paper className={classes.paper}>
-              <Button className='availHourBtn' variant="contained" onClick={() => openMeetupModal(hour)} style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', width: '100%', backgroundColor: 'white', color: 'black' }}>{(hour > 12) ? `${hour - 12} PM` : ``}{(hour < 12) ? `${hour} AM` : ''}{(hour === 12) ? `12 PM` : ''}</Button></Paper></Grid>
+              <Button className='availHourBtn' variant="contained" onClick={() => openMeetupModal(hour)} style={{ display: 'flex', justifyContent: 'center', marginTop: '10px', width: '100%', backgroundColor: 'white', color: 'black' }}>{(hour > 12) ? `${hour - 12} PM` : ``}{(hour < 12) ? `${hour} AM` : ''}{(hour === 12) ? `12 PM` : ''}</Button></Paper></Grid>
         ))}
         </Grid>
         <Modal
