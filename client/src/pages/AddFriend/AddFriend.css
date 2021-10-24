@@ -1,3 +1,7 @@
 #addfriend {
   background: linear-gradient(0deg, rgb(255, 63, 59) 0%, hsla(50, 100%, 69%, 1) 100%);
 }
+
+.searchFriendBtn:hover {
+  background-color: lightgrey !important;
+}

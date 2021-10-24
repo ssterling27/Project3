@@ -3,6 +3,8 @@ import { Button, Paper, Box, Typography, Grid, Card, CardActionArea, CardActions
 import './Activities.css'
 
 import SynergizeLogo from '../../images/Synergize-Logo-10.png'
+import BookBuster from '../../images/bookBuster.png'
+import MePlant from '../../images/mePlant.png'
 
 function Activities() {
   return (
@@ -19,19 +21,19 @@ function Activities() {
                 <CardMedia
                   component="img"
                   height="170"
-                  image=''
+                  image={BookBuster}
                   alt=""
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Title
+                    BookBuster
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum amet facilis excepturi, neque nesciunt aliquam assumenda nemo ea soluta quae praesentium et quos optio laboriosam, magnam unde cum cupiditate molestias.
+                    Find a book and/or movie to with your friends!
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='#' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' href='https://polyca123.github.io/Bookbuster/' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>
@@ -40,19 +42,19 @@ function Activities() {
                 <CardMedia
                   component="img"
                   height="170"
-                  image={SynergizeLogo}
+                  image={MePlant}
                   alt=""
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
-                    Title
+                    MePlant
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum amet facilis excepturi, neque nesciunt aliquam assumenda nemo ea soluta quae praesentium et quos optio laboriosam, magnam unde cum cupiditate molestias.
+                    Discuss plant care tips and tricks with friends and others!
                   </Typography>
                 </CardContent>
                 <CardActions>
-                  <Button variant='contained' href='#' target='_blank'>Visit Site</Button>
+                  <Button variant='contained' href='https://meplant-app.herokuapp.com/' target='_blank'>Visit Site</Button>
                 </CardActions>
               </Card>
             </Grid>

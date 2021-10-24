@@ -178,14 +178,14 @@ function Meetup({
           </div>       
         </Paper>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Button variant="contained" style={{ marginTop: '20px', backgroundColor: '#78797B', color: 'white'}} onClick={findEvents}>Find Available Times</Button>
+        <Button className='findAvailTimesBtn' variant="contained" style={{ marginTop: '20px', backgroundColor: '#78797B', color: 'white'}} onClick={findEvents}>Find Available Times</Button>
       </div>
       <div style={{ marginTop: '2%', display: 'flex', flexDirection: 'column', alignItems: 'center', height: '70vh', marginRight: '2%', marginLeft: '2%' }}>
         <Grid container spacing={2}>
         {availableTimes.map(hour => (
           <Grid item xs={6}>
             <Paper className={classes.paper}>
-              <Button variant="contained" onClick={() => openMeetupModal(hour)} style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', width: '100%', backgroundColor: 'white', color: 'black' }}>{(hour > 12) ? `${hour - 12} PM` : ``}{(hour < 12) ? `${hour} AM` : ''}{(hour === 12) ? `12 PM` : ''}</Button></Paper></Grid>
+              <Button className='availHourBtn' variant="contained" onClick={() => openMeetupModal(hour)} style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', width: '100%', backgroundColor: 'white', color: 'black' }}>{(hour > 12) ? `${hour - 12} PM` : ``}{(hour < 12) ? `${hour} AM` : ''}{(hour === 12) ? `12 PM` : ''}</Button></Paper></Grid>
         ))}
         </Grid>
         <Modal

@@ -34,7 +34,7 @@ function FriendSearchForm({
 //  search friend query
  const searchUsers = (query) => {
    setSearchState(query)
-   console.log(searchState)
+  //  console.log(searchState)
    UserAPI.searchFriend(JSON.stringify({query: query}))
     .then(res => setUserDetails(res.data.user))
     .catch(err => console.log(err))
@@ -53,9 +53,11 @@ function FriendSearchForm({
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 600,
+  maxHeight: 400,
   bgcolor: 'white',
   border: '2px solid grey',
   p: 4,
+  overflow: 'scroll'
  }
 
  return (
@@ -65,17 +67,17 @@ function FriendSearchForm({
      </Paper>
      <br />
      <div style={{ display: 'flex', justifyContent: 'center' }}>
-       <Button variant="contained" style={{ backgroundColor: '#78797B', color: 'white', marginBottom: '2%' }} onClick={handleOpen}>Search Friend</Button>
+       <Button className='searchFriendBtn' variant="contained" style={{ backgroundColor: '#78797B', color: 'white', marginBottom: '2%' }} onClick={handleOpen}>Search Friend</Button>
      </div>
      <hr />
      <Grid container spacing={2} style={{ marginTop: '2%', opacity: '70%', color: 'black'}}>
        <Grid item xs={6} md={6}>
-         <Paper elevation={8} style={{display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center'}}>
+         <Paper elevation={8} style={{display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center', fontSize: '2rem'}}>
            Friends
          </Paper>
        </Grid>
        <Grid item xs={6} md={6}>
-         <Paper elevation={8} style={{display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center'}}>
+         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', height: '100%', alignItems: 'center', fontSize: '2rem'}}>
            Friend Requests
          </Paper>
        </Grid>
@@ -86,7 +88,7 @@ function FriendSearchForm({
          <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center' }}>
            <List>
              {friends.map(friend => {
-               return <ListItem><ListItemText style={{ color: 'black' }} />Username: {friend.username} | Name: {friend.name}</ListItem>
+               return <ListItem style={{ marginBottom: '3%', marginTop: '2%', fontWeight: 'bold', borderRadius: '1.5%', background: '#ede8e8', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'}}><ListItemText style={{ color: 'black' }} />Username: {friend.username} | Name: {friend.name}</ListItem>
              })}
            </List>
          </Paper>
@@ -95,7 +97,7 @@ function FriendSearchForm({
          <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center' }}>
            <List>
              {friendRequestState.map(friendRequest => {
-               return <ListItem><ListItemText style={{ color: 'black' }} />Username: {friendRequest.username} | Name: {friendRequest.name}</ListItem>
+               return <ListItem style={{ marginBottom: '3%', marginTop: '2%', fontWeight: 'bold', borderRadius: '1.5%', background: '#ede8e8', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)' }}><ListItemText style={{ color: 'black' }} />Username: {friendRequest.username} | Name: {friendRequest.name}</ListItem>
              })}
            </List>
          </Paper>
@@ -115,9 +117,10 @@ function FriendSearchForm({
        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
         <TextField variant="outlined" type="text" value={searchState} onChange={(e) => searchUsers(e.target.value)} label="Query Username" style={{ width: '45%' }} />
        </div>
+       <br />
        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
         {userDetails.map(item => {
-          return <ListItem style={{ marginLeft: '25%', marginRight: '25%' }}><ListItemText style={{ color: 'black' }}>{item.username}</ListItemText><Button id={item._id} variant="contained" onClick={event => {
+          return <ListItem style={{ marginLeft: '25%', marginRight: '25%', marginBottom: '4%', borderRadius: '1.5%', background: 'lightgrey', boxShadow: '0 3px 10px rgb(0 0 0 / 0.2)'}}><ListItemText style={{ color: 'black' }}>{item.username}</ListItemText><Button id={item._id} variant="contained" onClick={event => {
             handleClose()
             sendFriendRequest(event)}}>Add Friend</Button></ListItem>
         })}

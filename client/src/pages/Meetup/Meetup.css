@@ -1,3 +1,12 @@
 #meetup {
   background: linear-gradient(0deg, hsla(240, 65%, 24%, 1) 0%, rgb(255, 63, 59) 100%);
 }
+
+.findAvailTimesBtn:hover {
+  background-color: lightgrey !important;
+}
+
+.availHourBtn:hover {
+  background-color: darkgray !important;
+  color: white !important
+}
