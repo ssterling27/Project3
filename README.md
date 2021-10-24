@@ -18,7 +18,7 @@ This application is powered by React, Javascript, Material UI and others.
  <img src="https://img.shields.io/badge/-date fns npm-pink">
 </p>
 
-#### Deployed Link Heroku: [Synergize]()
+#### Deployed Link Heroku: [Synergize](https://synergize-27.herokuapp.com/)
 
 #### [Gitub Repo](https://github.com/ssterling27/Project3)
 
