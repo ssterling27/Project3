@@ -21,14 +21,14 @@ const Parralax = () => {
   let offset4 = -1000
   if ((offsetY >= (window.innerHeight)) && (offsetY <= (1.5 * window.innerHeight))) {
     offset1 = -200
-    offset2 = (offsetY * 1.12)
-    offset3 = (offsetY * 1.12)
+    offset2 = (offsetY * 1.14)
+    offset3 = (offsetY * 1.14)
     opacity3 = ((offsetY - window.innerHeight) / window.innerHeight)
   } else if ((offsetY >= (1.5 * window.innerHeight)) && (offsetY <= (2.25 * window.innerHeight))) {
     offset1 = -200
     offset2 = -200
-    offset3 = (offsetY * 1.12)
-    offset4 = (offsetY * 1.12)
+    offset3 = (offsetY * 1.14)
+    offset4 = (offsetY * 1.14)
     opacity4 = ((offsetY - (1.5 * window.innerHeight)) / window.innerHeight)
   } else if ((offsetY >= (2.25 * window.innerHeight)) && (offsetY <= (3.2 * window.innerHeight))) {
     offset1 = -200
@@ -37,8 +37,8 @@ const Parralax = () => {
     offset4 = (offsetY * 1.14)
   }
   else if (offsetY <= window.innerHeight) {
-    offset1 = (offsetY * 1.12)
-    offset2 = (offsetY * 1.12)
+    offset1 = (offsetY * 1.14)
+    offset2 = (offsetY * 1.14)
     opacity2 = (offsetY / window.innerHeight)
     // opacity1 = (1 - (offsetY / window.innerHeight))
   }
