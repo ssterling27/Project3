@@ -104,7 +104,11 @@ function Calendar({
   }
   
 const handleDeleteEvent = () => {
-  EventAPI.delete(selectedEvent.id, selectedEvent.users)
+  let peopleInvolved = []
+  selectedEvent.users.map(user => {
+    peopleInvolved.push(user._id)
+  })
+  EventAPI.delete(selectedEvent.id, peopleInvolved)
   .then(() => {
     setAllEvents(allEvents.filter(ev => ev._id !== selectedEvent.id))
     setSelectedEvent({

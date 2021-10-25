@@ -1,5 +1,12 @@
 #meetup {
   background: linear-gradient(0deg, hsla(240, 65%, 24%, 1) 0%, rgb(255, 63, 59) 100%);
+  height: 100vh;
+}
+
+@media screen and (max-width: 600px) {
+  #meetup {
+    height: calc(100vh - 40px);
+  }
 }
 
 .findAvailTimesBtn:hover {

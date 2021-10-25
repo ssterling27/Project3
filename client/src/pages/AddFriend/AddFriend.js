@@ -13,7 +13,7 @@ function AddFriend ({
   closeFriendRequestSent
 }) {
   return (
-    <div id={'addfriend'} style={{ height: '100vh'}}>
+    <div id={'addfriend'}>
       <div style={{ position: 'relative', width: '100%', float: 'right', zIndex: 2 }}>
      <FriendSearchForm
      friends={friends}

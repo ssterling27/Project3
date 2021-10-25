@@ -15,6 +15,7 @@ import addHours from 'date-fns/addHours'
 import {} from 'date-fns'
 import MeetupAPI from '../../utils/MeetupAPI'
 import './Meetup.css'
+// import MeetupParallax from './MeetupParallax'
 
 const locales = {
   'en-US': require('date-fns/locale/en-US')
@@ -157,7 +158,8 @@ function Meetup({
 // console.log(openTimes)
   
   return (
-    <div id={'meetup'} style={{ height: '100vh'}}>
+    <div id={'meetup'}>
+      {/* <MeetupParallax /> */}
       <div style={{ position: 'relative', zIndex: 2, float: 'right', width: '100%' }}>
         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2%', marginTop: '1%', marginLeft: 'auto', marginRight: 'auto', color: 'black', backgroundColor: 'rgba(255, 255, 255, 0.7)', width: '80%', height: '5vh' }}>
           <h1>Schedule a meetup</h1>

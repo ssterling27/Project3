@@ -3,6 +3,12 @@
   height: 100vh
 }
 
+/* @media screen and (max-width: 600px) {
+  #home {
+    height: calc(100vh - 40px);
+  }
+} */
+
 .logo {
   margin-top: 5%;
 }
