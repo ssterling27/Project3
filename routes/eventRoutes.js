@@ -24,10 +24,10 @@ router.put('/events/:id', passport.authenticate('jwt'), async function (req, res
 })
 
 router.post('/events/delete/:id', passport.authenticate('jwt'), async function (req, res) {
-  const users = req.body
+  const peopleInvolved = req.body
   await Event.findByIdAndDelete(req.params.id)
-  users.forEach(user => {
-  User.findByIdAndUpdate(user._id, { $pull: { events: req.params.id } })
+  peopleInvolved.map(async function (people) {
+  await User.findByIdAndUpdate(people, { $pull: { events: req.params.id } })
   }) 
   res.sendStatus(200)
 })

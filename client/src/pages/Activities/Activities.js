@@ -17,7 +17,7 @@ import Pub from '../../images/pub.png'
 function Activities() {
   return (
 
-   <div id={'activities'} style={{ height: '100vh' }}>
+   <div id={'activities'}>
       <div style={{ zIndex: 2, position: 'relative', float: 'right', width: '100%' }}>
         <Paper elevation={8} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '2%', marginTop: '1%', marginLeft: 'auto', marginRight: 'auto', color: 'black', backgroundColor: 'rgba(255, 255, 255, 0.7)', width: '50%', height: '5vh' }}>
         <h1>Activities</h1>
